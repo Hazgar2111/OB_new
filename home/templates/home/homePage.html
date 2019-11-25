@@ -1,0 +1,390 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    {% load staticfiles %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="{% static "apple-touch-icon.png" %}">
+
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}">
+    <!--        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">-->
+
+    <!--For Plugins external css-->
+    <link rel="stylesheet" href="{% static "assets/css/plugins.css" %}"/>
+    <link rel="stylesheet" href="{% static "assets/css/lato-webfont.css" %}"/>
+    <link rel="stylesheet" href="{% static "assets/css/magnific-popup.css" %}">
+
+    <!--Theme custom css -->
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="{% static "assets/css/responsive.css" %}"/>
+    <script src="{% static "assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js" %}"></script>
+
+
+    <link rel="icon" type="image/png" href="{% static "assets/images/favicon.ico" %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+
+
+    <link rel="stylesheet" type="text/css" href="{% static "fonts/Linearicons-Free-v1.0.0/icon-font.min.css" %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/animate/animate.css" %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/animsition/css/animsition.min.css" %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/select2/select2.min.css" %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "vendor/daterangepicker/daterangepicker.css" %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static "css/util.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3..."/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://bootstraptema.ru/snippets/form/2017/styles.css" rel="stylesheet">
+
+
+</head>
+<body>
+<div class='preloader'>
+    <div class='loaded'>&nbsp;</div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-top ">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% if user.is_authenticated %}
+                <ul class="nav navbar-nav navbar-left">
+                <li class="active"><a href="#home">Personal cabinet</a></li>
+                <li><a href="#transfers">TRANSFERS</a></li>
+                <li><a href="#payments">PAYMENTS</a></li>
+                <li><a href="#contact">Contact</a></li>
+            {% else %}
+                <ul class="nav navbar-nav navbar-left">
+                <li class="active"><a href="#home">Home</a></li>
+                <li><a href="#transfers">TRANSFERS</a></li>
+                <li><a href="#payments">PAYMENTS</a></li>
+                <li><a href="#contact">Contact</a></li>
+            {% endif %}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right" class="nav-link dropdown-toggle" href="#" id="navbarDropdown">
+
+                <li class="dropdown on hover">
+
+                    {% if user.is_authenticated %}
+                        <a href="" class="btn btn-secondary dropdown-toggle"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" target="_blank">
+                            {{ user.login }}<span class="caret">
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <form action="{% url 'sign_in:log_out' %}" method="post">
+                                {% csrf_token %}
+                                <script type="text/javascript">
+                                    // using jQuery
+                                    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                                </script>
+                                <button action="{% url 'sign_in:log_out' %}" class="login100-form-btn">Log Out
+                                </button>
+                            </form>
+                        </ul>
+
+                    {% else %}
+                        <a class="dropdown-toggle" data-toggle="dropdown">login<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" class="hidden">
+
+                            <div class="limiter" class="dropdown_hazgar">
+
+                                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+                                    <form class="login100-form validate-form"
+                                          action="{% url 'sign_in:login_user' %}"
+                                          method="post">
+                                        {% csrf_token %}
+                                        <script type="text/javascript">
+                                            // using jQuery
+                                            var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+                                        </script>
+                                        <span class="login100-form-title p-b-33">
+		                            				Account Login
+                                            </span>
+
+                                        <div class="wrap-input100 validate-input"
+                                             data-validate="Valid Login is required">
+                                            <input class="input100" type="text" name="login" placeholder="Login">
+                                            <span class="focus-input100-1"></span>
+                                            <span class="focus-input100-2"></span>
+                                        </div>
+
+                                        <div class="wrap-input100 rs1 validate-input"
+                                             data-validate="Password is required">
+                                            <input class="input100" type="password" name="pass"
+                                                   placeholder="Password">
+                                            <span class="focus-input100-1"></span>
+                                            <span class="focus-input100-2"></span>
+                                        </div>
+
+                                        <div class="container-login100-form-btn m-t-20">
+                                            <button class="login100-form-btn"
+                                                    action="{% url 'sign_in:login_user' %}">
+                                                Sign in
+                                            </button>
+                                        </div>
+
+                                        <div class="text-center p-t-45 p-b-4">
+		                            				<span class="txt1">
+		                            					Forgot
+		                            				</span>
+
+                                            <a href="/sign_in/forgot_pass/" class="txt2 hov1">
+                                                Password?
+                                            </a>
+                                        </div>
+
+                                        <div class="text-center">
+		                            				<span class="txt1">
+		                            					Create an account?
+		                            				</span>
+
+                                            <a href="/sign_in/sign_up" class="txt2 hov1">
+                                                Sign up
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </ul>
+                    {% endif %}
+
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<!--Home page style-->
+
+{% if user.is_authenticated %}
+    <section id="home" class="home_auth">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4col-md-9 col-lg-9 col-xl-12">
+                <h2 class="home-content sections">
+                    Мой банк
+                </h2>
+            </div>
+        </div>
+    </section>
+
+{% else %}
+
+    <section id="home" class="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4col-md-9 col-lg-9 col-xl-12">
+                    <div class="home-content sections">
+                        <h1>Hazgar's project group</h1>
+                        <h2>Online banking</h2>
+                        <a href="/sign_in/sign_up/" target="_blank">
+                            <button class="btn btn-primary btn-lg">Become a customer</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endif %}
+<!--Home page style-->
+<!--transfers-->
+<section id="transfers" class="transfers">
+    <form action="{% url 'sign_in:transfers' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="creditCardForm">
+                <div class="creditcardform0" id="creditcardform0">
+                    <div class="heading">
+                        <h1>Please enter your card's data</h1>
+                    </div>
+                    <div class="payment">
+                        <div class="form-group owner">
+                            <label for="owner">Owner</label>
+                            <input type="text" class="form-control" id="owner" name="owner_name">
+                        </div>
+                        <div class="form-group CVV">
+                            <label for="cvv">CVV</label>
+                            <input type="text" class="form-control" id="cvv" name="cvv">
+                        </div>
+                        <div class="form-group" id="card-number-field">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" name="cardNumber">
+                        </div>
+                        <div class="form-group" id="expiration-date">
+                            <label>Expiration Date</label>
+                            <select name="month">
+                                <option value="01">January</option>
+                                <option value="02">February</option>
+                                <option value="03">March</option>
+                                <option value="04">April</option>
+                                <option value="05">May</option>
+                                <option value="06">June</option>
+                                <option value="07">July</option>
+                                <option value="08">August</option>
+                                <option value="09">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+                            </select>
+                            <select name="year">
+                                <option value="16"> 2019</option>
+                                <option value="17"> 2020</option>
+                                <option value="18"> 2021</option>
+                                <option value="19"> 2022</option>
+                                <option value="20"> 2023</option>
+                                <option value="21"> 2024</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="credit_cards">
+                            <img src="https://bootstraptema.ru/snippets/form/2017/visa.jpg" id="visa">
+                            <img src="https://bootstraptema.ru/snippets/form/2017/mastercard.jpg" id="mastercard">
+                            <img src="https://bootstraptema.ru/snippets/form/2017/amex.jpg" id="amex">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="db" id="db">
+        </div>
+        <div class="row">
+            <div class="creditCardForm">
+                <div class="creditcardform1" id="creditcardform1">
+                    <div class="heading">
+                        <h1>Please enter your card's data to transfer</h1>
+                    </div>
+                    <div class="payment">
+                        <div class="form-group owner">
+                            <label for="owner">Owner</label>
+                            <input type="text" class="form-control" name="owner">
+                        </div>
+                        <div class="form-group CVV">
+                            <label for="cvv">Amount of money</label>
+                            <input type="text" class="form-control" name="amount_of_money">
+                        </div>
+                        <div class="form-group" id="card-number-field">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" class="form-control" name="card_number_to_trans">
+                        </div>
+                        <div class="form-group" id="pay-now">
+                            <button type="submit" class="btn btn-default" action= {% url 'sign_in:transfers' %}>
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+<!--transfers-->
+
+
+<!--Footer-->
+<footer id="footer" class="footer colorsbg">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="copyright text-left">
+                    <p>Made with <i class="fa fa-heart"></i> by <a href="http://bootstrapthemes.co"> Bootstrap
+                        Themes </a>2019. All rights reserved.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="copyright text-right">
+                    <p>Terms of Service | Privacy Policy</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+
+<script>
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+</script>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-rating/1.5.0/bootstrap-rating.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/easy-pie-chart/2.1.6/jquery.easypiechart.min.js"></script>
+
+
+<script src="{% static "assets/js/vendor/jquery-1.11.2.min.js" %}"></script>
+<script src="{% static "assets/js/vendor/bootstrap.min.js" %}"></script>
+<script src="{% static "assets/js/gmaps.min.js" %}"></script>
+<script src="{% static "assets/js/jquery.magnific-popup.js" %}"></script>
+<script src="{% static "assets/js/plugins.js" %}"></script>
+<script src="{% static "assets/js/main.js" %}"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.m.."></script>
+<script src="https://bootstraptema.ru/snippets/form/2017/jquery.payform.mi.."></script>
+<script src="https://bootstraptema.ru/snippets/form/2017/script.js"></script>
+
+
+<script src="{% static "vendor/jquery/jquery-3.2.1.min.js" %}"></script>
+<script src="{% static "vendor/animsition/js/animsition.min.js" %}"></script>
+<script src="{% static "vendor/bootstrap/js/popper.js" %}"></script>
+<script src="{% static "vendor/bootstrap/js/bootstrap.min.js" %}"></script>
+<script src="{% static "vendor/select2/select2.min.js" %}"></script>
+<script src="{% static "vendor/daterangepicker/moment.min.js" %}"></script>
+<script src="{% static "vendor/daterangepicker/daterangepicker.js" %}"></script>
+<script src="{% static "vendor/countdowntime/countdowntime.js" %}"></script>
+<script src="{% static "js/main.js" %}"></script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+
+html,
+body {
+    background-color: #ffffff;
+    font-size: 13px;
+    color: #565656;
+    width: 100%;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+}
+
+
+/*==========================================
+PRE LOADER
+==========================================*/
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fefefe;
+    z-index: 99999;
+    height: 100%;
+    width: 100%;
+    overflow: hidden !important;
+}
+
+.loaded {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-image: url(../images/preloading.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+    -moz-background-size: cover;
+    background-size: cover;
+    margin: -20px 0 0 -20px;
+}
+
+
+
+
+/*For Menu Style*/
+
+.navbar-default {
+    background-color: rgba(48, 48, 48, 0.42);
+    border-color:#fff;
+}
+
+.navbar {
+    min-height:90px;
+    margin-bottom:0;
+    border:0;
+    border-radius:0;
+}
+
+.navbar-default .navbar-nav>li>a {
+    font-size:14px;
+    text-transform:uppercase;
+    color:#fff;
+	line-height: 70px;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color:#4bcaff;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+    color: #fff;
+    background-color: transparent;
+    border-top: 3px solid #4bcaff;
+}
+
+
+/*For Home Section*/
+.nav-link dropdown-toggle {
+    background-color: #FFFFFF;
+
+}
+
+.home_auth{
+    background-color:#FFFFFF ;
+    height: 930px;
+    width: 1530px;
+    overflow: hidden;
+    z-index: 90;
+
+
+}
+
+.personal_cabinet{
+     position: fixed; /* Абсолютное позиционирование */
+     top: 20px; /* Положение от верхнего края */
+     left: 100px; /* Положение от левого края */
+     width: 600px; /* Ширина блока */
+     height: 430px;
+     background: #9fcdff; /* Цвет фона */
+     border: 5px ridge #6c757d; /* Параметры рамки */
+     padding: 10px; /* Поля вокруг текста */
+}
+
+
+
+.home{
+    background: url(../images/bg_home.jpg) no-repeat;
+    height: 930px;
+    transform: translateY(-18%);
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    width: 1530px;
+    overflow: hidden;
+    z-index: 90;
+
+
+}
+.creditcardform0{
+     position: fixed; /* Абсолютное позиционирование */
+     top: 20px; /* Положение от верхнего края */
+     left: 50px; /* Положение от левого края */
+     width: 600px; /* Ширина блока */
+     height: 430px;
+     background: color(#ffff00); /* Цвет фона */
+     border: 5px ridge #6c757d; /* Параметры рамки */
+     padding: 10px; /* Поля вокруг текста */
+}
+.creditcardform1{
+     position: fixed; /* Абсолютное позиционирование */
+     top: 20px; /* Положение от верхнего края */
+     right: 60px; /* Положение от правого края */
+     width: 600px; /* Ширина блока */
+     height: 430px;
+     background: color(#ffff00); /* Цвет фона */
+     border: 5px ridge #6c757d; /* Параметры рамки */
+     padding: 10px;
+}
+.db{
+    background-image: url(../images/db1.png);
+    position: fixed;
+    width: 184px;
+    height: 274px;
+    right: 670px;
+    transform: translateY(-50%);
+
+/* Отступы вокруг блока */
+}
+.home{
+    background-repeat: no-repeat;
+}
+
+.home-content{
+    z-index: 100;
+	color: #101010;
+	margin-top:280px;
+    font-weight: 900;
+    transform: translateY(120%);
+}
+
+
+.transfers{
+
+    transform: translateY(-20%);
+}
+.transfers-content{
+
+    transform: translateX(-20%);
+}
+.home-content h1{
+    margin-bottom: 0.5em ;
+    z-index: 100;
+	font-size:55px;
+	font-family: 'latolight';
+    font-weight: 800;
+
+}
+.home-content h2{
+     margin-bottom: 1em ;
+
+}
+.btn btn-primary btn-lg {
+    background: #ffff00 ;
+}
+.home-content h1 span{
+    z-index: 100;
+	font-family: 'latobold';
+	color:#0000FF;
+
+}
+.home-content p{
+    z-index: 100;
+	margin:30px 0;
+
+}
+
+
+/* For Footer Section*/
+.copyright{
+	font-size:12px;
+}
+.copyright a{
+	color:#4bcaff;
+}
+
+
+
+.h1_home{
+    transform: translateY(120%);
+    -webkit-font-smoothing: antialiased;
+-webkit-box-direction: normal;
+margin: 0;
+list-style-type: none;
+box-sizing: border-box;
+text-align: left;
+font-family: Roboto,sans-serif;
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+color: #000;
+cursor: pointer;
+padding: 0 8px 8px;
+}
+
+.home_auth{
+    background-color: #9d9d9d;
+    height: 930px;
+    transform: translateY(-18%);
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    width: 1530px;
+    overflow: hidden;
+}
+
