@@ -55,14 +55,6 @@ class LoginValue(AbstractBaseUser):
     def get_short_name(self):
         return self.login
 
-    # this methods are require to login super user from admin panel
-    def has_perm(self, perm, obj=None):
-        return self.is_staff
-
-    # this methods are require to login super user from admin panel
-    def has_module_perms(self, app_label):
-        return self.is_staff
-
 
 def __str__(self):
     return self.iin

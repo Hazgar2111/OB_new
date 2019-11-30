@@ -14,6 +14,6 @@ urlpatterns = [
     path('new_pass/', views.new_pass, name='new_pass'),
     path('login_user/', views.login_user, name='login_user'),
     path('personal_cabinet/', views.personal_cabinet, name='personal_cabinet'),
-    path('log_out/', auth_views.LogoutView.as_view(), name='log_out'),
+    path('log_out/', views.logout1, name='log_out'),
     path('transfers/', views.transfers, name='transfers'),
 ]

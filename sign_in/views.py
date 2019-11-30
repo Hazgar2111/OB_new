@@ -1,17 +1,14 @@
 import logging
+import time
+from random import randint
 
-from django.contrib.auth import login
-from django.http import HttpResponse
-from django.shortcuts import render, render_to_response
-from django.template import RequestContext
-from sign_in.models import LoginValue
-
+from django.contrib.auth import login, user_logged_out
+from django.contrib.auth.models import AnonymousUser
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 
 from sign_in.models import LoginValue, Cards
-import urllib.request
-from random import randint
-from django.contrib.auth import logout
-from django.contrib import sessions
+
 
 def index_sign_up(request):
     return render(request, 'sign_in/sign_up_page.html')
@@ -83,6 +80,8 @@ def new_pass(request):
 
 
 def transfers(request):
+    if not request.session.has_key("user_id"):
+        return HttpResponse('proverka')
     all_cards = Cards.objects.all()
     if request.method == 'POST':
         name = request.POST.get('owner_name')
@@ -177,37 +176,47 @@ def add_user(request):
 
 def login_user(request):
     all_users = LoginValue.objects.all()
+    print(all_users)
     login1 = ''
     pass1 = ''
     controller = 0
     a1 = {}
-    session_key = 0
-    request.session.set_expiry(10)
+    #request.session.clear()
     if request.method == 'POST':
         login1 = request.POST.get('login')
         pass1 = request.POST.get('pass')
-    try:
         lenth = len(all_users)
         for i in range(lenth):
             if all_users[i].login == login1 and all_users[i].check_password(pass1):
-                request.session[0] = all_users[i].sys_id
-                a1 = {'user': all_users[i]}
-                all_users[i].is_active = True
-                all_users[i].save()
-                controller = 1
-                request.session['user_id'] = all_users[i].id
-                request.session.set_expiry(300)
-
-    except LoginValue.DoesNotExist:
-        logging.getLogger("error_logger").error("user with login %s does not exists " % login)
-        return None
-    except Exception as e:
-        logging.getLogger("error_logger").error(repr(e))
-        return None
+                keys = request.session.keys()
+                print(keys)
+                if str(all_users[i].sys_id) in keys:
+                    print("vrode robit")
+                    return HttpResponse("This user already auth")
+                else:
+                    a1 = {'user': all_users[i]}
+                    all_users[i].is_active = True
+                    all_users[i].save()
+                    controller = 1
+                    request.session[all_users[i].sys_id] = all_users[i].sys_id + 1
+                    print("users id is", request.session[all_users[i].sys_id])
+                    #request.session.set_expiry(300)
+                    #time.sleep(10)
+                    print(request.session)
     if controller == 1:
         return render(request, 'home/homePage.html', context=a1)
     else:
         return HttpResponse('Your login or password is incorrect')
+
+
+def logout1(request):
+    try:
+        request.session.flush()
+        request.user = AnonymousUser()
+    except KeyError:
+        pass
+
+    return HttpResponseRedirect('home/homePage.html')
 
 
 def get_user(self, user_id):

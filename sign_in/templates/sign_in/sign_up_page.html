@@ -28,29 +28,31 @@
     <!--for sign_in-->
 
 </head>
+<script>
+    </script>
 <body>
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
-            <form class="login100-form " onsubmit=" return validate1();" action="{% url 'sign_in:add_user' %}"
+            <form class="login100-form" onsubmit="return validate1()" action="{% url 'sign_in:add_user' %}"
                   method="post" id="sign_in_form">
                 {% csrf_token %}
                 <span class="login100-form-title p-b-33">
 						Account Registration
 					</span>
                 <div class="wrap-input100 validate-input" data-validate="login is required">
-                    <input class="input100" name="login" type="text" placeholder="Login">
+                    <input class="input100" id="login" name="login" type="text" placeholder="Login">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
 
                 <div class="wrap-input100 ">
-                    <input class="input100" name="name" type="text" placeholder="Name">
+                    <input class="input100" id="name"  name="name" type="text" placeholder="Name">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
                 <div class="wrap-input100 ">
-                    <input class="input100" name="surname" type="text" placeholder="Surname">
+                    <input class="input100" id="surname" name="surname" type="text" placeholder="Surname">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
@@ -73,14 +75,14 @@
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
-                <div class="wrap-input100 rs1" id="pass2">
-                    <input class="input100" name="pass2" id="pass2" type="password" placeholder="Repeat password">
+                <div class="wrap-input100">
+                    <input class="input100" id="pass2" type="password" placeholder="Repeat password">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
 
                 <div class="container-login100-form-btn m-t-20">
-                    <button class="login100-form-btn" type="submit">
+                    <button class="login100-form-btn" onsubmit="return validate1()" type="submit">
                         Sign up
                     </button>
                 </div>
@@ -90,8 +92,13 @@
 </div>
 
 
-<script type="text/javascript">
 
+<script>
+{#    сама валидация работает#}
+    $('#sign_in_form').on('submit', function(event){
+    event.preventDefault();
+    return validate1()
+});
     function validate1() {
         var login = document.getElementById("login");
         var name = document.getElementById("name");
@@ -100,19 +107,21 @@
         var iin = document.getElementById("iin");
         var pass1 = document.getElementById("pass1");
         var pass2 = document.getElementById("pass2");
-
-
-        const element = document.querySelector('sign_in_form');
-        element.addEventListener('submit', event =>{
-            event.preventDefault();
-            console.log("Form ne rob")
-        });
-
+        console.log("Работает")
         //чтобы не переходило по форме
         //e.preventDefault();
-
-
-            if (login.value) {
+            if (!login.value && !name.value && !surname.value && !phone.value && !iin.value && !pass1.value && !pass2.value)
+            {
+                login.style.border = "2px solid red";
+                name.style.border = "2px solid red";
+                surname.style.border = "2px solid red";
+                phone.style.border = "2px solid red";
+                iin.style.border = "2px solid red";
+                pass1.style.border = "2px solid red";
+                pass2.style.border = "2px solid red";
+                return false;
+            }
+            if (!login.value) {
                 login.style.border = "2px solid red";
                 console.log(login.value)
                 return false;
@@ -129,25 +138,22 @@
                 phone.style.border = "2px solid red";
                 return false;
             }
-
             if (!iin.value && iin.value.length !== 12) {
                 iin.style.border = "2px solid red";
                 return false;
             }
-
             if (!pass1.value) {
                 pass1.style.border = "2px solid red";
                 return false;
             }
-
             if (!pass2.value) {
                 pass2.style.border = "2px solid red";
+                console.log(pass2.value);
                 return false;
             }
-            return true;
+            document.getElementById('sign_in_form').submit();
         }
 </script>
-<!--for sign_in-->
 <script src="{% static "vendor/jquery/jquery-3.2.1.min.js" %}"></script>
 <script src="{% static "vendor/animsition/js/animsition.min.js" %}"></script>
 <script src="{% static "vendor/bootstrap/js/popper.js" %}"></script>
@@ -157,7 +163,7 @@
 <script src="{% static "vendor/daterangepicker/daterangepicker.js" %}"></script>
 <script src="{% static "vendor/countdowntime/countdowntime.js" %}"></script>
 <script src="{% static "js/main.js" %}"></script>
-<!--for sign_in-->
 
 </body>
 </html>
+
