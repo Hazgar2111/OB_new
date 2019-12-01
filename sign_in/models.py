@@ -50,9 +50,11 @@ class LoginValue(AbstractBaseUser):
         return self.login
 
     def get_full_name(self):
-        return self.login
+        str = self.name + self.surname
+        return str
 
     def get_short_name(self):
+
         return self.login
 
 

@@ -52,6 +52,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3..."/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://bootstraptema.ru/snippets/form/2017/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3...%22/%3E
+    <link href=" https:
+    //fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://bootstraptema.ru/snippets/form/2017/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://1xbet.kz/styles/css/lk/main-light.c6837cb7b0f440cb5fde.css" type="text/css">
 
 
 </head>
@@ -81,12 +86,14 @@
                 <li class="active"><a href="#home">Personal cabinet</a></li>
                 <li><a href="#transfers">TRANSFERS</a></li>
                 <li><a href="#payments">PAYMENTS</a></li>
+                <li><a href="#recievecard">RECIEVE CARD</a></li>
                 <li><a href="#contact">Contact</a></li>
             {% else %}
                 <ul class="nav navbar-nav navbar-left">
                 <li class="active"><a href="#home">Home</a></li>
                 <li><a href="#transfers">TRANSFERS</a></li>
                 <li><a href="#payments">PAYMENTS</a></li>
+                <li><a href="#recievecard">RECIEVE CARD</a></li>
                 <li><a href="#contact">Contact</a></li>
             {% endif %}
             </ul>
@@ -192,12 +199,73 @@
 <!--Home page style-->
 
 {% if user.is_authenticated %}
-    <section id="home" class="home_auth">
-        <div class="row">
-            <div class="col-xs-4 col-sm-4col-md-9 col-lg-9 col-xl-12">
-                <h2 class="home-content sections">
-                    Мой банк
-                </h2>
+    <section id="home" class="home_auth_pic">
+        <div class="home_auth">
+            <div class="container">
+
+                <div class="ap__maincontent">
+                    <div class="apm-block">
+                        <div class="apm-form">
+                            <div class="apm-form__fields">
+                                <div class="apm-form__col">
+                                    <div class="apm-form__group">
+                                        <div class="apm-form__head">Account's data</div>
+                                        <div class="apm-form__field">
+                                            <p class="apm-form__caption">Card Number</p>
+                                            <div class="apm-form__con">
+                                                <p class="apm-form__value">{{ card.number }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="apm-form__field">
+                                            <p class="apm-form__caption">Balance</p>
+                                            <div class="apm-form__con">
+                                                <p class="apm-form__value">{{ card.balance }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="apm-form__group">
+                                        <div class="apm-form__head">Personal data</div>
+                                        <div class="apm-form__field">
+                                            <p class="apm-form__error" id="office_phone"></p>
+                                            <p class="apm-form__caption">Mobile</p>
+                                            <div class="apm-form__con">
+                                                <p class="apm-form__value">+{{ user.phone_number }}</p>
+                                                <span class="apm-form__icon_edit attach_phone"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="apm-form__field">
+                                        <p class="apm-form__error" id="office_surname"></p>
+                                        <p class="apm-form__caption ">Surname</p>
+                                        <div class="apm-form__con">
+                                            <p class="apm-form__value">{{ user.surname }}</p>
+                                            <span class="apm-form__icon_locked"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="apm-form__field">
+                                        <p class="apm-form__error" id="office_name"></p>
+                                        <p class="apm-form__caption ">Name</p>
+                                        <div class="apm-form__con">
+                                            <p class="apm-form__value">{{ user.name }}</p>
+                                            <span class="apm-form__icon_locked"></span>
+                                        </div>
+                                    </div>
+                                    <div class="apm-form__field">
+                                        <p class="apm-form__caption">Your password</p>
+                                        <div class="apm-form__con">
+                                            <p class="apm-form__value">********</p>
+                                            <span class="apm-form__icon_locked"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -315,27 +383,324 @@
 <!--transfers-->
 
 
-<!--Footer-->
-<footer id="footer" class="footer colorsbg">
-    <div class="container">
-        <div class="row">
+</section>
 
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="copyright text-left">
-                    <p>Made with <i class="fa fa-heart"></i> by <a href="http://bootstrapthemes.co"> Bootstrap
-                        Themes </a>2019. All rights reserved.</p>
+<section id="payments" class="payment_trans">
+    <form action="{% url 'sign_in:transfers' %}" method="post">
+        {% csrf_token %}
+        <div class="">
+            <div>
+                <div class="cont1">
+                    <div class="col-lg-3">
+                        <div class="">
+                            <div class="">
+                                <h3 class="text-center">Mobile</h3>
+
+                            </div>
+                            <div class="panel-body">
+                            </div>
+                            <fieldset>
+                                <div class="form-group has-error">
+                                    <input class="form-control input-lg" placeholder="+7(XXX)XXX-XX-XX" name="email"
+                                           type="text">
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control input-lg">
+                                        <option value="01">Choose</option>
+                                        <option value="01">Activ</option>
+                                        <option value="02">Kcell</option>
+                                        <option value="03">Altel</option>
+                                        <option value="04">Tele-2</option>
+                                        <option value="05">Beeline</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
+                                           type="text">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
+                                        |HOME|</a>
+
+                                    </label>
+                                </div>
+                                <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                        action="{% url 'sign_in:transfers' %}">
+                                    PAY
+                                </button>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="">
+                            <div class="">
+                                <h3 class="text-center">BetGames</h3>
+
+                            </div>
+                            <div class="panel-body">
+                            </div>
+                            <fieldset>
+                                <div class="form-group has-error">
+                                    <input class="form-control input-lg" placeholder="ID:" name="email" type="text">
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control input-lg">
+                                        <option value="01">Choose</option>
+                                        <option value="01">Pari Match</option>
+                                        <option value="02">Olimp</option>
+                                        <option value="03">1XBET</option>
+                                        <option value="04">Tennisi.kz</option>
+                                        <option value="05">Gol+Pass</option>
+                                        <option value="06">Profit</option>
+                                    </select>
+
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
+                                           type="text">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
+                                        |HOME|</a>
+
+                                    </label>
+                                </div>
+                                <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                        action="{% url 'sign_in:transfers' %}">
+                                    PAY
+                                </button>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 ">
+
+                        <h3 class="text-center">Onai </h3>
+
+                        <div class="panel-body">
+                        </div>
+                        <fieldset>
+                            <div class="form-group has-error">
+                                <input class="form-control input-lg" placeholder="Number:" name="email"
+                                       type="text">
+                            </div>
+
+                            <div class="form-group">
+                                <select class="form-control input-lg">
+                                    <option value="00">Choose</option>
+                                    <option value="00">Student</option>
+                                    <option value="01">Adult</option>
+                                    <option value="02">Retirement</option>
+
+                                </select>
+
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control input-lg"
+
+                                       placeholder="Amount" name="answer" value=""
+                                       type="text">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input name="terms" type="checkbox">I CHECK THE ENTERED NUMBER <a href="#">
+                                    |HOME|</a>
+                                </label>
+                            </div>
+                            <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                    action="{% url 'sign_in:transfers' %}">
+                                PAY
+                            </button>
+                        </fieldset>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="copyright text-right">
-                    <p>Terms of Service | Privacy Policy</p>
+    </form>
+</section>
+
+
+<section id="recievecard">
+    <div class="center">
+        <div class="container">
+            <div class="col-xs-4 col-sm-4col-md-9 col-lg-9 col-xl-12 col-md-1">
+                <div class="form-area">
+                    <form action="https://getcreditcardonline.com/custom-credit-card/" method="post" name="encriptog"
+                          id="encriptog">
+                        <br style="clear:both">
+                        <h3 style="margin-bottom:5px; text-align: center;">Choose Credit Card Designs</h3>
+                        <div class="form-group">
+                            <label for="username" class="control-label">YOUR NAME:</label>
+                            <input class="form-control" id="nombreth" maxlength="25" name="nombreth"
+                                   value={{ user.get_full_name }} type="text">
+                            <div pseudo="placeholder"></div>
+                            <div contenteditable="plaintext-only"></div>
+                            </input>
+                            <label class="control-label" for="username">TYPE</label>
+                            <ul class="hz">
+                                <li>
+                                    <input checked name="tpy" type="radio" value="Credit">
+                                    </input>
+                                    " Credit"
+                                </li>
+                                <li>…</li>
+                            </ul>
+                            <div class="containerlist">
+                                <div class="boxlist col1list">
+                                    <ul>
+                                        <label for="username" class="control-label">VISA</label>
+                                        <li>
+                                            <input type="radio" value="VElectron" name="issuing">
+                                            </input>
+                                            " Electron"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="VInfinite" name="issuing">
+                                            </input>
+                                            " Infinite"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="VGold" name="issuing" checked>
+                                            </input>
+                                            " Gold"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="VPlatinum" name="issuing">
+                                            </input>
+                                            " Platinum"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="VSignature" name="issuing">
+                                            </input>
+                                            " Signature"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="VTraditional" name="issuing">
+                                            </input>
+                                            " Traditional"
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="boxlist col2list">
+                                    <ul>
+                                        <label for="username" class="control-label">MASTERCARD</label>
+                                        <li>
+                                            <input type="radio" value="MTitanium" name="issuing">
+                                            </input>
+                                            " Titanium"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="MBlack" name="issuing">
+                                            </input>
+                                            " Black"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="MWorld" name="issuing">
+                                            </input>
+                                            " World"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="MGold" name="issuing">
+                                            </input>
+                                            " Gold"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="MCirrus" name="issuing">
+                                            </input>
+                                            " Cirrus"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="MPlatinum" name="issuing">
+                                            </input>
+                                            " Platinum"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="MStandard" name="issuing">
+                                            </input>
+                                            " Standard"
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="MPrepaid" name="issuing">
+                                            </input>
+                                            " Prepaid"
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <label for="username" class="control-label">CHIP</label>
+                            <ul class="hz">
+                                <li>
+                                    <input type="radio" value="Yes" name="chip" checked>
+                                    </input>
+                                    " Yes"
+                                </li>
+                                <li>
+                                    <input type="radio" value="No" name="chip">
+                                    </input>
+                                    " No"
+                                </li>
+                            </ul>
+                            <label for="username" class="control-label">Contactless</label>
+                            <ul class="hz">
+                                <li>
+                                    <input type="radio" value="Yes" name="contactl" checked>
+                                    </input>
+                                    " Yes"
+                                </li>
+                                <li>
+                                    <input type="radio" value="No" name="contactl">
+                                    </input>
+                                    " No"
+                                </li>
+                            </ul>
+                        </div>
+                        <button type="submit" id="submit" name="Enviar" class="btn btn-primary pull-right">GENERATE
+                        </button>
+                    </form>
+                    <a name="resp2"></a>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</footer>
+</section>
+<!--Footer-->
+<section id="contact">
+    <div class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                    <h4> Hazgar's project group </h4>
+                </div>
+                <div class="col-lg-3 col-sm-2 col-xs-3">
+                    <h3> Contact </h3>
+                    <ul>
+                        <li><a class="email" href="#"> hazgar_project_group@hazgar.kz</a></li>
+                        <br/>
+                        <li><p> Kazakhstan. Almaty</p></li>
+                        <li><p>
+                            <a href="/sign_in/sign_up" class="txt2 hov1">
+                                Sign up!
+                            </a></p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="container">
+            <p class="pull-left copyright"> HAZGAR'S PROJECT GROUP © HPG.kz 2019. All right reserved.
+            </p>
+        </div>
+    </div>
+</section>
 
 
 <script>

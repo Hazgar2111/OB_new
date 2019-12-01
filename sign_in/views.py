@@ -80,8 +80,8 @@ def new_pass(request):
 
 
 def transfers(request):
-    if not request.session.has_key("user_id"):
-        return HttpResponse('proverka')
+    #if not request.session.has_key("user_id"):
+        #return HttpResponse('proverka')
     all_cards = Cards.objects.all()
     if request.method == 'POST':
         name = request.POST.get('owner_name')
@@ -176,6 +176,7 @@ def add_user(request):
 
 def login_user(request):
     all_users = LoginValue.objects.all()
+    all_cards = Cards.objects.all()
     print(all_users)
     login1 = ''
     pass1 = ''
@@ -188,21 +189,23 @@ def login_user(request):
         lenth = len(all_users)
         for i in range(lenth):
             if all_users[i].login == login1 and all_users[i].check_password(pass1):
-                keys = request.session.keys()
-                print(keys)
-                if str(all_users[i].sys_id) in keys:
-                    print("vrode robit")
-                    return HttpResponse("This user already auth")
-                else:
-                    a1 = {'user': all_users[i]}
-                    all_users[i].is_active = True
-                    all_users[i].save()
-                    controller = 1
-                    request.session[all_users[i].sys_id] = all_users[i].sys_id + 1
-                    print("users id is", request.session[all_users[i].sys_id])
-                    #request.session.set_expiry(300)
-                    #time.sleep(10)
-                    print(request.session)
+                #keys = request.session.keys()
+                #print(keys)
+                #if str(all_users[i].sys_id) in keys:
+                    #print("vrode robit")
+                    #return HttpResponse("This user already auth")
+                #else:
+                a1 = {'user': all_users[i]}
+                all_users[i].is_active = True
+                all_users[i].save()
+                controller = 1
+                request.session[all_users[i].sys_id] = all_users[i].sys_id + 1
+                for i in all_cards:
+                    if i.login == login1:
+                        a1.update({'card': i})
+                #request.session.set_expiry(300)
+                #time.sleep(10)
+                print(request.session)
     if controller == 1:
         return render(request, 'home/homePage.html', context=a1)
     else:
@@ -215,7 +218,6 @@ def logout1(request):
         request.user = AnonymousUser()
     except KeyError:
         pass
-
     return HttpResponseRedirect('home/homePage.html')
 
 
