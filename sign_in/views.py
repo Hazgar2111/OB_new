@@ -131,7 +131,6 @@ def transfers_confirm(request):
 
 def add_user(request):
     all_users = LoginValue.objects.all()
-
     if request.method == 'POST':
         login1 = request.POST.get('login')
         name = request.POST.get('name')
@@ -140,6 +139,7 @@ def add_user(request):
         iin = request.POST.get('iin')
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
+        print("1={} 2={}".format(pass1, pass2))
         temp = 0
         for i in all_users:
             if i.login == login1:
@@ -165,7 +165,6 @@ def add_user(request):
                     return render(request, 'home/homePage.html')
                 else:
                     return HttpResponse("INVALID NUMBER OF PHONE")
-
             elif temp == 2:
                 temp = 0
                 return HttpResponse("This phone has been already used")

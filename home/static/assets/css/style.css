@@ -165,13 +165,13 @@ PRE LOADER
 }
 .home_auth{
     height: 430px;
-    transform: translateY(30%) translateX(16%);
-    width: 1150px;
-    opacity: inherit;
+    transform: translateY(30%) translateX(24%);
+    width: 800px;
+
 }
 .home_auth_pic{
     background: url(../images/les.png) no-repeat;
-    height: 930px;
+    height: 739px;
     background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
@@ -193,14 +193,15 @@ PRE LOADER
 
 .payment_trans{
     top: 120px;
-
     height: 930px;
     width: 1530px;
     overflow: hidden;
 }
 
 
-
+.footer1{
+    transform: translateY(-76%);
+}
 
 
 .home-content h1{

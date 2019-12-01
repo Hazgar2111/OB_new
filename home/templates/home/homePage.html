@@ -198,73 +198,60 @@
 {% if user.is_authenticated %}
     <section id="home" class="home_auth_pic">
         <div class="home_auth">
-            <div class="container">
-
-                <div class="ap__maincontent">
-                    <div class="apm-block">
-                        <div class="apm-form">
-                            <div class="apm-form__fields">
-                                <div class="apm-form__col">
-                                    <div class="apm-form__group">
-                                        <div class="apm-form__head">Account's data</div>
-                                        <div class="apm-form__field">
-                                            <p class="apm-form__caption">Card Number</p>
-                                            <div class="apm-form__con">
-                                                <p class="apm-form__value">{{ card.number }}</p>
-                                            </div>
-                                        </div>
-                                        <div class="apm-form__field">
-                                            <p class="apm-form__caption">Balance</p>
-                                            <div class="apm-form__con">
-                                                <p class="apm-form__value">{{ card.balance }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="apm-form__group">
-                                        <div class="apm-form__head">Personal data</div>
-                                        <div class="apm-form__field">
-                                            <p class="apm-form__error" id="office_phone"></p>
-                                            <p class="apm-form__caption">Mobile</p>
-                                            <div class="apm-form__con">
-                                                <p class="apm-form__value">+{{ user.phone_number }}</p>
-                                                <span class="apm-form__icon_edit attach_phone"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="apm-form__field">
-                                        <p class="apm-form__error" id="office_surname"></p>
-                                        <p class="apm-form__caption ">Surname</p>
-                                        <div class="apm-form__con">
-                                            <p class="apm-form__value">{{ user.surname }}</p>
-                                            <span class="apm-form__icon_locked"></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="apm-form__field">
-                                        <p class="apm-form__error" id="office_name"></p>
-                                        <p class="apm-form__caption ">Name</p>
-                                        <div class="apm-form__con">
-                                            <p class="apm-form__value">{{ user.name }}</p>
-                                            <span class="apm-form__icon_locked"></span>
-                                        </div>
-                                    </div>
-                                    <div class="apm-form__field">
-                                        <p class="apm-form__caption">Your password</p>
-                                        <div class="apm-form__con">
-                                            <p class="apm-form__value">********</p>
-                                            <span class="apm-form__icon_locked"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+             <div class="apm-form__group">
+                <div class="apm-form__head">Card's data</div>
+                <div class="apm-form__field">
+                    <p class="apm-form__caption">Card Number</p>
+                    <div class="apm-form__con">
+                        <p class="apm-form__value">{{ card.number }}</p>
                     </div>
+                </div>
+
+            </div>
+            <div class="apm-form__field">
+                <p class="apm-form__caption ">Balance</p>
+                <div class="apm-form__con">
+                    <p class="apm-form__value">{{ card.balance }}</p>
+                </div>
+            </div>
+
+
+            <div class="apm-form__group">
+                <div class="apm-form__head">Personal data</div>
+                <div class="apm-form__field">
+                    <p class="apm-form__caption">Mobile</p>
+                    <div class="apm-form__con">
+                        <p class="apm-form__value">+{{ user.phone_number }}</p>
+                        <span class="apm-form__icon_edit attach_phone"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="apm-form__field">
+                <p class="apm-form__caption ">Surname</p>
+                <div class="apm-form__con">
+                    <p class="apm-form__value">{{ user.surname }}</p>
+                    <span class="apm-form__icon_locked"></span>
+                </div>
+            </div>
+
+            <div class="apm-form__field">
+                <p class="apm-form__caption ">Name</p>
+                <div class="apm-form__con">
+                    <p class="apm-form__value">{{ user.name }}</p>
+                    <span class="apm-form__icon_locked"></span>
+                </div>
+            </div>
+            <div class="apm-form__field">
+                <p class="apm-form__caption">Your password</p>
+                <div class="apm-form__con">
+                    <p class="apm-form__value">********</p>
+                    <span class="apm-form__icon_locked"></span>
                 </div>
             </div>
         </div>
+
     </section>
 
 {% else %}
@@ -289,388 +276,389 @@
 <!--Home page style-->
 <!--transfers-->
 {% if user.is_authenticated %}
-<section id="transfers" class="transfers">
-    <form action="{% url 'sign_in:transfers' %}" method="post">
-        {% csrf_token %}
-        <div class="row">
-            <div class="creditCardForm">
-                <div class="creditcardform0" id="creditcardform0">
-                    <div class="heading">
-                        <h1>Please enter your card's data</h1>
-                    </div>
-                    <div class="payment">
-                        <div class="form-group owner">
-                            <label for="owner">Owner</label>
-                            <input type="text" class="form-control" id="owner" name="owner_name">
+    <section id="transfers" class="transfers">
+        <form action="{% url 'sign_in:transfers' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="creditCardForm">
+                    <div class="creditcardform0" id="creditcardform0">
+                        <div class="heading">
+                            <h1>Please enter your card's data</h1>
                         </div>
-                        <div class="form-group CVV">
-                            <label for="cvv">CVV</label>
-                            <input type="text" class="form-control" id="cvv" name="cvv">
-                        </div>
-                        <div class="form-group" id="card-number-field">
-                            <label for="cardNumber">Card Number</label>
-                            <input type="text" class="form-control" id="cardNumber" name="cardNumber">
-                        </div>
-                        <div class="form-group" id="expiration-date">
-                            <label>Expiration Date</label>
-                            <select name="month">
-                                <option value="01">January</option>
-                                <option value="02">February</option>
-                                <option value="03">March</option>
-                                <option value="04">April</option>
-                                <option value="05">May</option>
-                                <option value="06">June</option>
-                                <option value="07">July</option>
-                                <option value="08">August</option>
-                                <option value="09">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
-                            </select>
-                            <select name="year">
-                                <option value="16"> 2019</option>
-                                <option value="17"> 2020</option>
-                                <option value="18"> 2021</option>
-                                <option value="19"> 2022</option>
-                                <option value="20"> 2023</option>
-                                <option value="21"> 2024</option>
-                            </select>
-                        </div>
-                        <div class="form-group" id="credit_cards">
-                            <img src="https://bootstraptema.ru/snippets/form/2017/visa.jpg" id="visa">
-                            <img src="https://bootstraptema.ru/snippets/form/2017/mastercard.jpg" id="mastercard">
-                            <img src="https://bootstraptema.ru/snippets/form/2017/amex.jpg" id="amex">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="db" id="db">
-        </div>
-        <div class="row">
-            <div class="creditCardForm">
-                <div class="creditcardform1" id="creditcardform1">
-                    <div class="heading">
-                        <h1>Please enter your card's data to transfer</h1>
-                    </div>
-                    <div class="payment">
-                        <div class="form-group owner">
-                            <label for="owner">Owner</label>
-                            <input type="text" class="form-control" name="owner">
-                        </div>
-                        <div class="form-group CVV">
-                            <label for="cvv">Amount of money</label>
-                            <input type="text" class="form-control" name="amount_of_money">
-                        </div>
-                        <div class="form-group" id="card-number-field">
-                            <label for="cardNumber">Card Number</label>
-                            <input type="text" class="form-control" name="card_number_to_trans">
-                        </div>
-                        <div class="form-group" id="pay-now">
-                            <button type="submit" class="btn btn-default" action= {% url 'sign_in:transfers' %}>
-                                Confirm
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-</section>
-
-<!--transfers-->
-
-
-</section>
-
-<section id="payments" class="payment_trans">
-    <form action="{% url 'sign_in:transfers' %}" method="post">
-        {% csrf_token %}
-        <div class="">
-            <div>
-                <div class="cont1">
-                    <div class="col-lg-3">
-                        <div class="">
-                            <div class="">
-                                <h3 class="text-center">Mobile</h3>
-
+                        <div class="payment">
+                            <div class="form-group owner">
+                                <label for="owner">Owner</label>
+                                <input type="text" class="form-control" id="owner" name="owner_name">
                             </div>
-                            <div class="panel-body">
+                            <div class="form-group CVV">
+                                <label for="cvv">CVV</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv">
                             </div>
-                            <fieldset>
-                                <div class="form-group has-error">
-                                    <input class="form-control input-lg" placeholder="+7(XXX)XXX-XX-XX" name="email"
-                                           type="text">
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="form-control input-lg">
-                                        <option value="01">Choose</option>
-                                        <option value="01">Activ</option>
-                                        <option value="02">Kcell</option>
-                                        <option value="03">Altel</option>
-                                        <option value="04">Tele-2</option>
-                                        <option value="05">Beeline</option>
-                                    </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
-                                           type="text">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
-                                        |HOME|</a>
-
-                                    </label>
-                                </div>
-                                <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
-                                        action="{% url 'sign_in:transfers' %}">
-                                    PAY
-                                </button>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3">
-                        <div class="">
-                            <div class="">
-                                <h3 class="text-center">BetGames</h3>
-
+                            <div class="form-group" id="card-number-field">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" class="form-control" id="cardNumber" name="cardNumber">
                             </div>
-                            <div class="panel-body">
-                            </div>
-                            <fieldset>
-                                <div class="form-group has-error">
-                                    <input class="form-control input-lg" placeholder="ID:" name="email" type="text">
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="form-control input-lg">
-                                        <option value="01">Choose</option>
-                                        <option value="01">Pari Match</option>
-                                        <option value="02">Olimp</option>
-                                        <option value="03">1XBET</option>
-                                        <option value="04">Tennisi.kz</option>
-                                        <option value="05">Gol+Pass</option>
-                                        <option value="06">Profit</option>
-                                    </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
-                                           type="text">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
-                                        |HOME|</a>
-
-                                    </label>
-                                </div>
-                                <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
-                                        action="{% url 'sign_in:transfers' %}">
-                                    PAY
-                                </button>
-                            </fieldset>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 ">
-
-                        <h3 class="text-center">Onai </h3>
-
-                        <div class="panel-body">
-                        </div>
-                        <fieldset>
-                            <div class="form-group has-error">
-                                <input class="form-control input-lg" placeholder="Number:" name="email"
-                                       type="text">
-                            </div>
-
-                            <div class="form-group">
-                                <select class="form-control input-lg">
-                                    <option value="00">Choose</option>
-                                    <option value="00">Student</option>
-                                    <option value="01">Adult</option>
-                                    <option value="02">Retirement</option>
-
+                            <div class="form-group" id="expiration-date">
+                                <label>Expiration Date</label>
+                                <select name="month">
+                                    <option value="01">January</option>
+                                    <option value="02">February</option>
+                                    <option value="03">March</option>
+                                    <option value="04">April</option>
+                                    <option value="05">May</option>
+                                    <option value="06">June</option>
+                                    <option value="07">July</option>
+                                    <option value="08">August</option>
+                                    <option value="09">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
                                 </select>
-
+                                <select name="year">
+                                    <option value="16"> 2019</option>
+                                    <option value="17"> 2020</option>
+                                    <option value="18"> 2021</option>
+                                    <option value="19"> 2022</option>
+                                    <option value="20"> 2023</option>
+                                    <option value="21"> 2024</option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <input class="form-control input-lg"
-
-                                       placeholder="Amount" name="answer" value=""
-                                       type="text">
+                            <div class="form-group" id="credit_cards">
+                                <img src="https://bootstraptema.ru/snippets/form/2017/visa.jpg" id="visa">
+                                <img src="https://bootstraptema.ru/snippets/form/2017/mastercard.jpg" id="mastercard">
+                                <img src="https://bootstraptema.ru/snippets/form/2017/amex.jpg" id="amex">
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="terms" type="checkbox">I CHECK THE ENTERED NUMBER <a href="#">
-                                    |HOME|</a>
-                                </label>
-                            </div>
-                            <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
-                                    action="{% url 'sign_in:transfers' %}">
-                                PAY
-                            </button>
-                        </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-    </form>
-</section>
-
-
-<section id="recievecard">
-    <div class="center">
-        <div class="container">
-            <div class="col-xs-4 col-sm-4col-md-9 col-lg-9 col-xl-12 col-md-1">
-                <div class="form-area">
-                    <form action="https://getcreditcardonline.com/custom-credit-card/" method="post" name="encriptog"
-                          id="encriptog">
-                        <br style="clear:both">
-                        <h3 style="margin-bottom:5px; text-align: center;">Choose Credit Card Designs</h3>
-                        <div class="form-group">
-                            <label for="username" class="control-label">YOUR NAME:</label>
-                            <input class="form-control" id="nombreth" maxlength="25" name="nombreth"
-                                   value={{ user.get_full_name }} type="text">
-                            <div pseudo="placeholder"></div>
-                            <div contenteditable="plaintext-only"></div>
-                            </input>
-                            <label class="control-label" for="username">TYPE</label>
-                            <ul class="hz">
-                                <li>
-                                    <input checked name="tpy" type="radio" value="Credit">
-                                    </input>
-                                    " Credit"
-                                </li>
-                                <li>…</li>
-                            </ul>
-                            <div class="containerlist">
-                                <div class="boxlist col1list">
-                                    <ul>
-                                        <label for="username" class="control-label">VISA</label>
-                                        <li>
-                                            <input type="radio" value="VElectron" name="issuing">
-                                            </input>
-                                            " Electron"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="VInfinite" name="issuing">
-                                            </input>
-                                            " Infinite"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="VGold" name="issuing" checked>
-                                            </input>
-                                            " Gold"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="VPlatinum" name="issuing">
-                                            </input>
-                                            " Platinum"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="VSignature" name="issuing">
-                                            </input>
-                                            " Signature"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="VTraditional" name="issuing">
-                                            </input>
-                                            " Traditional"
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="boxlist col2list">
-                                    <ul>
-                                        <label for="username" class="control-label">MASTERCARD</label>
-                                        <li>
-                                            <input type="radio" value="MTitanium" name="issuing">
-                                            </input>
-                                            " Titanium"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="MBlack" name="issuing">
-                                            </input>
-                                            " Black"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="MWorld" name="issuing">
-                                            </input>
-                                            " World"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="MGold" name="issuing">
-                                            </input>
-                                            " Gold"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="MCirrus" name="issuing">
-                                            </input>
-                                            " Cirrus"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="MPlatinum" name="issuing">
-                                            </input>
-                                            " Platinum"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="MStandard" name="issuing">
-                                            </input>
-                                            " Standard"
-                                        </li>
-                                        <li>
-                                            <input type="radio" value="MPrepaid" name="issuing">
-                                            </input>
-                                            " Prepaid"
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <label for="username" class="control-label">CHIP</label>
-                            <ul class="hz">
-                                <li>
-                                    <input type="radio" value="Yes" name="chip" checked>
-                                    </input>
-                                    " Yes"
-                                </li>
-                                <li>
-                                    <input type="radio" value="No" name="chip">
-                                    </input>
-                                    " No"
-                                </li>
-                            </ul>
-                            <label for="username" class="control-label">Contactless</label>
-                            <ul class="hz">
-                                <li>
-                                    <input type="radio" value="Yes" name="contactl" checked>
-                                    </input>
-                                    " Yes"
-                                </li>
-                                <li>
-                                    <input type="radio" value="No" name="contactl">
-                                    </input>
-                                    " No"
-                                </li>
-                            </ul>
+            <div class="db" id="db">
+            </div>
+            <div class="row">
+                <div class="creditCardForm">
+                    <div class="creditcardform1" id="creditcardform1">
+                        <div class="heading">
+                            <h1>Please enter your card's data to transfer</h1>
                         </div>
-                        <button type="submit" id="submit" name="Enviar" class="btn btn-primary pull-right">GENERATE
-                        </button>
-                    </form>
-                    <a name="resp2"></a>
+                        <div class="payment">
+                            <div class="form-group owner">
+                                <label for="owner">Owner</label>
+                                <input type="text" class="form-control" name="owner">
+                            </div>
+                            <div class="form-group CVV">
+                                <label for="cvv">Amount of money</label>
+                                <input type="text" class="form-control" name="amount_of_money">
+                            </div>
+                            <div class="form-group" id="card-number-field">
+                                <label for="cardNumber">Card Number</label>
+                                <input type="text" class="form-control" name="card_number_to_trans">
+                            </div>
+                            <div class="form-group" id="pay-now">
+                                <button type="submit" class="btn btn-default" action= {% url 'sign_in:transfers' %}>
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </form>
+    </section>
 
+    <!--transfers-->
+
+
+    </section>
+
+    <section id="payments" class="payment_trans">
+        <form action="{% url 'sign_in:transfers' %}" method="post">
+            {% csrf_token %}
+            <div class="">
+                <div>
+                    <div class="cont1">
+                        <div class="col-lg-3">
+                            <div class="">
+                                <div class="">
+                                    <h3 class="text-center">Mobile</h3>
+
+                                </div>
+                                <div class="panel-body">
+                                </div>
+                                <fieldset>
+                                    <div class="form-group has-error">
+                                        <input class="form-control input-lg" placeholder="+7(XXX)XXX-XX-XX" name="email"
+                                               type="text">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control input-lg">
+                                            <option value="01">Choose</option>
+                                            <option value="01">Activ</option>
+                                            <option value="02">Kcell</option>
+                                            <option value="03">Altel</option>
+                                            <option value="04">Tele-2</option>
+                                            <option value="05">Beeline</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
+                                               type="text">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
+                                            |HOME|</a>
+
+                                        </label>
+                                    </div>
+                                    <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                            action="{% url 'sign_in:transfers' %}">
+                                        PAY
+                                    </button>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="">
+                                <div class="">
+                                    <h3 class="text-center">BetGames</h3>
+
+                                </div>
+                                <div class="panel-body">
+                                </div>
+                                <fieldset>
+                                    <div class="form-group has-error">
+                                        <input class="form-control input-lg" placeholder="ID:" name="email" type="text">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <select class="form-control input-lg">
+                                            <option value="01">Choose</option>
+                                            <option value="01">Pari Match</option>
+                                            <option value="02">Olimp</option>
+                                            <option value="03">1XBET</option>
+                                            <option value="04">Tennisi.kz</option>
+                                            <option value="05">Gol+Pass</option>
+                                            <option value="06">Profit</option>
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
+                                               type="text">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
+                                            |HOME|</a>
+
+                                        </label>
+                                    </div>
+                                    <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                            action="{% url 'sign_in:transfers' %}">
+                                        PAY
+                                    </button>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 ">
+
+                            <h3 class="text-center">Onai </h3>
+
+                            <div class="panel-body">
+                            </div>
+                            <fieldset>
+                                <div class="form-group has-error">
+                                    <input class="form-control input-lg" placeholder="Number:" name="email"
+                                           type="text">
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control input-lg">
+                                        <option value="00">Choose</option>
+                                        <option value="00">Student</option>
+                                        <option value="01">Adult</option>
+                                        <option value="02">Retirement</option>
+
+                                    </select>
+
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control input-lg"
+
+                                           placeholder="Amount" name="answer" value=""
+                                           type="text">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="terms" type="checkbox">I CHECK THE ENTERED NUMBER <a href="#">
+                                        |HOME|</a>
+                                    </label>
+                                </div>
+                                <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                        action="{% url 'sign_in:transfers' %}">
+                                    PAY
+                                </button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </section>
+
+
+    <section id="recievecard">
+        <div class="center">
+            <div class="container">
+                <div class="col-xs-4 col-sm-4col-md-9 col-lg-9 col-xl-12 col-md-1">
+                    <div class="form-area">
+                        <form action="https://getcreditcardonline.com/custom-credit-card/" method="post"
+                              name="encriptog"
+                              id="encriptog">
+                            <br style="clear:both">
+                            <h3 style="margin-bottom:5px; text-align: center;">Choose Credit Card Designs</h3>
+                            <div class="form-group">
+                                <label for="username" class="control-label">YOUR NAME:</label>
+                                <input class="form-control" id="nombreth" maxlength="25" name="nombreth"
+                                       value={{ user.get_full_name }} type="text">
+                                <div pseudo="placeholder"></div>
+                                <div contenteditable="plaintext-only"></div>
+                                </input>
+                                <label class="control-label" for="username">TYPE</label>
+                                <ul class="hz">
+                                    <li>
+                                        <input checked name="tpy" type="radio" value="Credit">
+                                        </input>
+                                        " Credit"
+                                    </li>
+                                    <li>…</li>
+                                </ul>
+                                <div class="containerlist">
+                                    <div class="boxlist col1list">
+                                        <ul>
+                                            <label for="username" class="control-label">VISA</label>
+                                            <li>
+                                                <input type="radio" value="VElectron" name="issuing">
+                                                </input>
+                                                " Electron"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="VInfinite" name="issuing">
+                                                </input>
+                                                " Infinite"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="VGold" name="issuing" checked>
+                                                </input>
+                                                " Gold"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="VPlatinum" name="issuing">
+                                                </input>
+                                                " Platinum"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="VSignature" name="issuing">
+                                                </input>
+                                                " Signature"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="VTraditional" name="issuing">
+                                                </input>
+                                                " Traditional"
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="boxlist col2list">
+                                        <ul>
+                                            <label for="username" class="control-label">MASTERCARD</label>
+                                            <li>
+                                                <input type="radio" value="MTitanium" name="issuing">
+                                                </input>
+                                                " Titanium"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="MBlack" name="issuing">
+                                                </input>
+                                                " Black"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="MWorld" name="issuing">
+                                                </input>
+                                                " World"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="MGold" name="issuing">
+                                                </input>
+                                                " Gold"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="MCirrus" name="issuing">
+                                                </input>
+                                                " Cirrus"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="MPlatinum" name="issuing">
+                                                </input>
+                                                " Platinum"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="MStandard" name="issuing">
+                                                </input>
+                                                " Standard"
+                                            </li>
+                                            <li>
+                                                <input type="radio" value="MPrepaid" name="issuing">
+                                                </input>
+                                                " Prepaid"
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <label for="username" class="control-label">CHIP</label>
+                                <ul class="hz">
+                                    <li>
+                                        <input type="radio" value="Yes" name="chip" checked>
+                                        </input>
+                                        " Yes"
+                                    </li>
+                                    <li>
+                                        <input type="radio" value="No" name="chip">
+                                        </input>
+                                        " No"
+                                    </li>
+                                </ul>
+                                <label for="username" class="control-label">Contactless</label>
+                                <ul class="hz">
+                                    <li>
+                                        <input type="radio" value="Yes" name="contactl" checked>
+                                        </input>
+                                        " Yes"
+                                    </li>
+                                    <li>
+                                        <input type="radio" value="No" name="contactl">
+                                        </input>
+                                        " No"
+                                    </li>
+                                </ul>
+                            </div>
+                            <button type="submit" id="submit" name="Enviar" class="btn btn-primary pull-right">GENERATE
+                            </button>
+                        </form>
+                        <a name="resp2"></a>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-</section>
- {% endif %}
+    </section>
+{% endif %}
 <!--Footer-->
-<section id="contact">
+<section id="contact" class="footer1">
     <div class="footer" id="footer">
         <div class="container">
             <div class="row">
@@ -689,15 +677,14 @@
                             </a></p></li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>
 
-    <div class="">
-        <div class="container">
-            <p class="pull-left copyright"> HAZGAR'S PROJECT GROUP © HPG.kz 2019. All right reserved.
-            </p>
-        </div>
+    <div class="container">
+        <p class="pull-left copyright"> HAZGAR'S PROJECT GROUP © HPG.kz 2019. All right reserved.
+        </p>
     </div>
 </section>
 
