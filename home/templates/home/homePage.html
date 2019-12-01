@@ -86,14 +86,11 @@
                 <li class="active"><a href="#home">Personal cabinet</a></li>
                 <li><a href="#transfers">TRANSFERS</a></li>
                 <li><a href="#payments">PAYMENTS</a></li>
-                <li><a href="#recievecard">RECIEVE CARD</a></li>
+                <li><a href="#recievecard">DESIGN CARD</a></li>
                 <li><a href="#contact">Contact</a></li>
             {% else %}
                 <ul class="nav navbar-nav navbar-left">
                 <li class="active"><a href="#home">Home</a></li>
-                <li><a href="#transfers">TRANSFERS</a></li>
-                <li><a href="#payments">PAYMENTS</a></li>
-                <li><a href="#recievecard">RECIEVE CARD</a></li>
                 <li><a href="#contact">Contact</a></li>
             {% endif %}
             </ul>
@@ -291,6 +288,7 @@
 {% endif %}
 <!--Home page style-->
 <!--transfers-->
+{% if user.is_authenticated %}
 <section id="transfers" class="transfers">
     <form action="{% url 'sign_in:transfers' %}" method="post">
         {% csrf_token %}
@@ -670,6 +668,7 @@
         </div>
     </div>
 </section>
+ {% endif %}
 <!--Footer-->
 <section id="contact">
     <div class="footer" id="footer">
