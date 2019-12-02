@@ -198,7 +198,8 @@
 {% if user.is_authenticated %}
     <section id="home" class="home_auth_pic">
         <div class="home_auth">
-             <div class="apm-form__group">
+
+            <div class="apm-form__group">
                 <div class="apm-form__head">Card's data</div>
                 <div class="apm-form__field">
                     <p class="apm-form__caption">Card Number</p>
@@ -207,12 +208,20 @@
                     </div>
                 </div>
 
-            </div>
-            <div class="apm-form__field">
-                <p class="apm-form__caption ">Balance</p>
-                <div class="apm-form__con">
-                    <p class="apm-form__value">{{ card.balance }}</p>
+
+                <div class="apm-form__field">
+                    <p class="apm-form__caption ">Balance</p>
+                    <div class="apm-form__con">
+                        <p class="apm-form__value">{{ card.balance }}</p>
+                    </div>
                 </div>
+                <div class="apm-form__field">
+                    <p class="apm-form__caption ">СVV</p>
+                    <div class="apm-form__con">
+                        <p class="apm-form__value">{{ card.cvv }}</p>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -232,7 +241,6 @@
                 <p class="apm-form__caption ">Surname</p>
                 <div class="apm-form__con">
                     <p class="apm-form__value">{{ user.surname }}</p>
-                    <span class="apm-form__icon_locked"></span>
                 </div>
             </div>
 
@@ -240,14 +248,14 @@
                 <p class="apm-form__caption ">Name</p>
                 <div class="apm-form__con">
                     <p class="apm-form__value">{{ user.name }}</p>
-                    <span class="apm-form__icon_locked"></span>
                 </div>
             </div>
+
             <div class="apm-form__field">
                 <p class="apm-form__caption">Your password</p>
                 <div class="apm-form__con">
                     <p class="apm-form__value">********</p>
-                    <span class="apm-form__icon_locked"></span>
+                    <a href="/sign_in/change_pass/"><span class="apm-form__icon_locked"></span></a>
                 </div>
             </div>
         </div>
@@ -277,7 +285,7 @@
 <!--transfers-->
 {% if user.is_authenticated %}
     <section id="transfers" class="transfers">
-        <form action="{% url 'sign_in:transfers' %}" method="post">
+        <form action="{% url 'sign_in:transfers' %}" onsubmit="return validate1()" method="post" id="transfer_form">
             {% csrf_token %}
             <div class="row">
                 <div class="creditCardForm">
@@ -288,7 +296,7 @@
                         <div class="payment">
                             <div class="form-group owner">
                                 <label for="owner">Owner</label>
-                                <input type="text" class="form-control" id="owner" name="owner_name">
+                                <input type="text" class="form-control" id="owner_name" name="owner_name">
                             </div>
                             <div class="form-group CVV">
                                 <label for="cvv">CVV</label>
@@ -343,18 +351,20 @@
                         <div class="payment">
                             <div class="form-group owner">
                                 <label for="owner">Owner</label>
-                                <input type="text" class="form-control" name="owner">
+                                <input type="text" class="form-control" name="owner" id="owner">
                             </div>
                             <div class="form-group CVV">
                                 <label for="cvv">Amount of money</label>
-                                <input type="text" class="form-control" name="amount_of_money">
+                                <input type="text" class="form-control" name="amount_of_money" id="amount_of_money">
                             </div>
                             <div class="form-group" id="card-number-field">
                                 <label for="cardNumber">Card Number</label>
-                                <input type="text" class="form-control" name="card_number_to_trans">
+                                <input type="text" class="form-control" name="card_number_to_trans"
+                                       id="card_number_to_trans">
                             </div>
                             <div class="form-group" id="pay-now">
-                                <button type="submit" class="btn btn-default" action= {% url 'sign_in:transfers' %}>
+                                <button type="submit" class="btn btn-default" onsubmit="return validate1()"
+                                        action={% url 'sign_in:transfers' %} type="submit">
                                     Confirm
                                 </button>
                             </div>
@@ -368,7 +378,7 @@
     <!--transfers-->
 
 
-    </section>
+
 
     <section id="payments" class="payment_trans">
         <form action="{% url 'sign_in:transfers' %}" method="post">
@@ -511,7 +521,7 @@
     </section>
 
 
-    <section id="recievecard">
+    <section id="recievecard" class="recievecard">
         <div class="center">
             <div class="container">
                 <div class="col-xs-4 col-sm-4col-md-9 col-lg-9 col-xl-12 col-md-1">
@@ -668,9 +678,11 @@
                 <div class="col-lg-3 col-sm-2 col-xs-3">
                     <h3> Contact </h3>
                     <ul>
-                        <li><a class="email" href="#"> hazgar_project_group@hazgar.kz</a></li>
+                        <li><a class="email"
+                               href="mailto:hazgar.project.group@gmail.com?subject=Welcome to the online banking of the Hazgar’S Project Group. How can we help you?">
+                            hazgar.project.group@gmail.com</a></li>
                         <br/>
-                        <li><p> Kazakhstan. Almaty</p></li>
+                        <li><p>Almaty, Manasa 34a, +7-777-777-77-77</p></li>
                         <li><p>
                             <a href="/sign_in/sign_up" class="txt2 hov1">
                                 Sign up!
@@ -708,6 +720,61 @@
 
     var csrftoken = getCookie('csrftoken');
 </script>
+
+<script>
+{# сама валидация работает#}
+$('#transfer_form').on('submit', function(event){
+event.preventDefault();
+return validate1()
+});
+function validate1() {
+var owner_name = document.getElementById("owner_name");
+var cvv = document.getElementById("cvv");
+var cardNumber = document.getElementById("cardNumber");
+var owner = document.getElementById("owner");
+var amount_of_money = document.getElementById("amount_of_money");
+var card_number_to_trans = document.getElementById("card_number_to_trans");
+console.log("Работает")
+//чтобы не переходило по форме
+//e.preventDefault();
+if (!owner_name.value && !cvv.value && !cardNumber.value && !owner.value && !amount_of_money.value && !card_number_to_trans.value)
+{
+owner_name.style.border = "2px solid red";
+cvv.style.border = "2px solid red";
+cardNumber.style.border = "2px solid red";
+owner.style.border = "2px solid red";
+amount_of_money.style.border = "2px solid red";
+card_number_to_trans.style.border = "2px solid red";
+return false;
+}
+if (!owner_name.value) {
+owner_name.style.border = "2px solid red";
+return false;
+}
+if (!cvv.value) {
+cvv.style.border = "2px solid red";
+return false;
+}
+if (!cardNumber.value) {
+cardNumber.style.border = "2px solid red";
+return false;
+}
+if (!owner.value) {
+owner.style.border = "2px solid red";
+return false;
+}
+if (!amount_of_money.value) {
+amount_of_money.style.border = "2px solid red";
+return false;
+}
+if (!card_number_to_trans.value) {
+card_number_to_trans.style.border = "2px solid red";
+return false;
+}
+document.getElementById('transfer_form').submit();
+}
+</script>
+
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>

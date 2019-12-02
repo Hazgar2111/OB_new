@@ -22,6 +22,10 @@ def personal_cabinet(request):
     return render(request, 'sign_in/personal_cabinet.html')
 
 
+def change_pass_index(request):
+    return render(request, 'sign_in/change_pass.html')
+
+
 def recovery_code(request):
     all_users = LoginValue.objects.all()
     random_code = str(randint(100000, 999999))
@@ -229,3 +233,18 @@ def get_user(self, user_id):
     except LoginValue.DoesNotExist:
         logging.getLogger("error_logger").error("user with %(user_id)d not found")
         return None
+
+
+def change_pass(request):
+    all_users = LoginValue.objects.all()
+    pass1 = ''
+    pass2 = ''
+    if request.method == 'POST':
+        pass1 = request.POST.get('pass1')
+        pass2 = request.POST.get('pass2')
+    if pass1 == pass2:
+        #for i in all_users:
+                #i.save()
+        return HttpResponseRedirect('home/homePage.html')
+    else:
+        return HttpResponse("Passwords have no equals")

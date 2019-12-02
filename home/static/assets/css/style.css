@@ -131,6 +131,7 @@ PRE LOADER
      background: color(#ffff00); /* Цвет фона */
      border: 5px ridge #6c757d; /* Параметры рамки */
      padding: 10px; /* Поля вокруг текста */
+
 }
 .creditcardform1{
      position: fixed; /* Абсолютное позиционирование */
@@ -141,6 +142,7 @@ PRE LOADER
      background: color(#ffff00); /* Цвет фона */
      border: 5px ridge #6c757d; /* Параметры рамки */
      padding: 10px;
+
 }
 .db{
     background-image: url(../images/db1.png);
@@ -164,32 +166,35 @@ PRE LOADER
     transform: translateY(120%);
 }
 .home_auth{
-    height: 430px;
-    transform: translateY(30%) translateX(24%);
-    width: 800px;
+    height: 450px;
+    transform: translateY(39%) translateX(29%);
+    width: 650px;
 
 }
 .home_auth_pic{
-    background: url(../images/les.png) no-repeat;
+    background: url(../images/m5.jpg) no-repeat;
     height: 739px;
     background-size: cover;
     -moz-background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
-    width: 1530px;
+    width: 1920px;
     overflow: hidden;
 }
 
 .transfers{
     height: 930px;
     width: 1530px;
-    overflow: hidden;
     transform: translateY(20%);
+
+
 }
 .transfers-content{
     transform: translateX(-20%);
 }
-
+.recievecard{
+    transform: translateY(-40%) translateX(-20%);
+}
 
 .payment_trans{
     top: 120px;
@@ -198,7 +203,18 @@ PRE LOADER
     overflow: hidden;
 }
 
+.boxlist {
+width: 48%;
+}
 
+.col1list {
+float: left;
+clear: left;
+}
+
+.col2list {
+float: left;
+}
 .footer1{
     transform: translateY(-76%);
 }

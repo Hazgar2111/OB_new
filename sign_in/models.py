@@ -9,6 +9,7 @@ class Cards(models.Model):
     surname = models.CharField(max_length=16, null=True, blank=True)
     balance = models.CharField(max_length=1000, null=True, blank=True)
     date = models.DateField(max_length=16, null=True, blank=True)
+    cvv  = models.CharField(max_length=3, blank=True)
 
 
 class MyUserManager(BaseUserManager):
