@@ -29,7 +29,7 @@
 
 </head>
 <script>
-    </script>
+</script>
 <body>
 <div class="limiter">
     <div class="container-login100">
@@ -46,16 +46,7 @@
                     <span class="focus-input100-2"></span>
                 </div>
 
-                <div class="wrap-input100 ">
-                    <input class="input100" id="name"  name="name" type="text" placeholder="Name">
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
-                </div>
-                <div class="wrap-input100 ">
-                    <input class="input100" id="surname" name="surname" type="text" placeholder="Surname">
-                    <span class="focus-input100-1"></span>
-                    <span class="focus-input100-2"></span>
-                </div>
+
                 <div class="wrap-input100 ">
                     <input class="input100" name="phone" id="phone" type="text"
                            placeholder="Phone Example: [77XX-XXX-XX-XX]">
@@ -64,22 +55,42 @@
 
                 </div>
 
+
                 <div class="wrap-input100 ">
                     <input class="input100" name="iin" id="iin" type="text" placeholder="IIN">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
 
+
+                <div class="wrap-input100 ">
+                    <input class="input100" id="name" name="name" type="text" placeholder="Name">
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
+
+
+                <div class="wrap-input100 ">
+                    <input class="input100" id="surname" name="surname" type="text" placeholder="Surname">
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
+
+
                 <div class="wrap-input100 rs1">
                     <input class="input100" name="pass1" id="pass1" type="password" placeholder="Password">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
+
+
                 <div class="wrap-input100">
                     <input class="input100" name="pass2" id="pass2" type="password" placeholder="Repeat password">
                     <span class="focus-input100-1"></span>
                     <span class="focus-input100-2"></span>
                 </div>
+
+
 
                 <div class="container-login100-form-btn m-t-20">
                     <button class="login100-form-btn" onsubmit="return validate1()" type="submit">
@@ -92,13 +103,13 @@
 </div>
 
 
-
 <script>
-{#    сама валидация работает#}
-    $('#sign_in_form').on('submit', function(event){
-    event.preventDefault();
-    return validate1()
-});
+    {#    сама валидация работает#}
+    $('#sign_in_form').on('submit', function (event) {
+        event.preventDefault();
+        return validate1()
+    });
+
     function validate1() {
         var login = document.getElementById("login");
         var name = document.getElementById("name");
@@ -107,52 +118,68 @@
         var iin = document.getElementById("iin");
         var pass1 = document.getElementById("pass1");
         var pass2 = document.getElementById("pass2");
-        console.log("Работает")
+        console.log("Работает");
         //чтобы не переходило по форме
         //e.preventDefault();
-            if (!login.value && !name.value && !surname.value && !phone.value && !iin.value && !pass1.value && !pass2.value)
-            {
-                login.style.border = "2px solid red";
-                name.style.border = "2px solid red";
-                surname.style.border = "2px solid red";
-                phone.style.border = "2px solid red";
-                iin.style.border = "2px solid red";
-                pass1.style.border = "2px solid red";
-                pass2.style.border = "2px solid red";
-                return false;
+
+
+        login.addEventListener("input", function (event) {
+            if (login.validity.typeMismatch) {
+                login.setCustomValidity("I expect an e-mail, darling!");
+            } else {
+                login.setCustomValidity("");
             }
-            if (!login.value) {
-                login.style.border = "2px solid red";
-                console.log(login.value)
-                return false;
-            }
-            if (!name.value) {
-                name.style.border = "2px solid red";
-                return false;
-            }
-            if (!surname.value) {
-                surname.style.border = "2px solid red";
-                return false;
-            }
-            if (!phone.value && phone.value.length !== 11 && phone.value[0] !== '7' && phone.value[1] !== '7') {
-                phone.style.border = "2px solid red";
-                return false;
-            }
-            if (!iin.value && iin.value.length !== 12) {
-                iin.style.border = "2px solid red";
-                return false;
-            }
-            if (!pass1.value) {
-                pass1.style.border = "2px solid red";
-                return false;
-            }
-            if (!pass2.value) {
-                pass2.style.border = "2px solid red";
-                console.log(pass2.value);
-                return false;
-            }
-            document.getElementById('sign_in_form').submit();
+        });
+        if (!login.value && !name.value && !surname.value && !phone.value && !iin.value && !pass1.value && !pass2.value) {
+            login.style.border = "2px solid red";
+            name.style.border = "2px solid red";
+            surname.style.border = "2px solid red";
+            phone.style.border = "2px solid red";
+            iin.style.border = "2px solid red";
+            pass1.style.border = "2px solid red";
+            pass2.style.border = "2px solid red";
+            return false;
         }
+        if (!login.value) {
+            login.style.border = "2px solid red";
+            console.log(login.value);
+            return false;
+        }
+        if (!name.value) {
+            name.style.border = "2px solid red";
+            return false;
+        }
+        if (!surname.value) {
+            surname.style.border = "2px solid red";
+            return false;
+        }
+        if (!phone.value && phone.value.length !== 11 && phone.value[0] !== '7' && phone.value[1] !== '7') {
+            phone.style.border = "2px solid red";
+            return false;
+        }
+        if (!iin.value && iin.value.length !== 12) {
+            iin.style.border = "2px solid red";
+            return false;
+        }
+        if (!pass1.value ) {
+            pass1.style.border = "2px solid red";
+            return false;
+        }
+
+        if (!pass2.value ) {
+            pass2.style.border = "2px solid red";
+            console.log(pass2.value);
+            return false;
+        }
+         if (pass1.value.length < 8 || pass2.value.length < 8)
+        {
+            pass2.style.border = "2px solid red";
+            pass1.style.border = "2px solid red";
+            return false;
+        }
+
+        document.getElementById('sign_in_form').submit();
+    }
 </script>
 <script src="{% static "vendor/jquery/jquery-3.2.1.min.js" %}"></script>
 <script src="{% static "vendor/animsition/js/animsition.min.js" %}"></script>

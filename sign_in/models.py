@@ -58,8 +58,8 @@ class LoginValue(AbstractBaseUser):
 
         return self.login
 
+    def __str__(self):
+        return self.iin
 
-def __str__(self):
-    return self.iin
-# Create your models here.
+
 

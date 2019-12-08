@@ -52,9 +52,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3..."/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://bootstraptema.ru/snippets/form/2017/styles.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3...%22/%3E
-    <link href=" https:
-    //fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3...%22/%3E">
+    <link href="https: //fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="https://bootstraptema.ru/snippets/form/2017/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://1xbet.kz/styles/css/lk/main-light.c6837cb7b0f440cb5fde.css" type="text/css">
 
@@ -140,14 +139,14 @@
 
                                         <div class="wrap-input100 validate-input"
                                              data-validate="Valid Login is required">
-                                            <input class="input100" type="text" name="login" placeholder="Login">
+                                            <input class="input100" type="text" name="login1" placeholder="Login">
                                             <span class="focus-input100-1"></span>
                                             <span class="focus-input100-2"></span>
                                         </div>
 
                                         <div class="wrap-input100 rs1 validate-input"
                                              data-validate="Password is required">
-                                            <input class="input100" type="password" name="pass"
+                                            <input class="input100" type="password" name="pass1"
                                                    placeholder="Password">
                                             <span class="focus-input100-1"></span>
                                             <span class="focus-input100-2"></span>
@@ -387,7 +386,7 @@
                 <div>
                     <div class="cont1">
                         <div class="col-lg-3">
-                            <div class="">
+                            <div class="mob">
                                 <div class="">
                                     <h3 class="text-center">Mobile</h3>
 
@@ -431,7 +430,7 @@
                         </div>
 
                         <div class="col-lg-3">
-                            <div class="">
+                            <div class="bet">
                                 <div class="">
                                     <h3 class="text-center">BetGames</h3>
 
@@ -474,44 +473,45 @@
                             </div>
                         </div>
                         <div class="col-lg-3 ">
+                            <div class="onai">
+                                <h3 class="text-center">Onai </h3>
 
-                            <h3 class="text-center">Onai </h3>
+                                <div class="panel-body">
+                                </div>
+                                <fieldset>
+                                    <div class="form-group has-error">
+                                        <input class="form-control input-lg" placeholder="Number:" name="email"
+                                               type="text">
+                                    </div>
 
-                            <div class="panel-body">
+                                    <div class="form-group">
+                                        <select class="form-control input-lg">
+                                            <option value="00">Choose</option>
+                                            <option value="00">Student</option>
+                                            <option value="01">Adult</option>
+                                            <option value="02">Retirement</option>
+
+                                        </select>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control input-lg"
+
+                                               placeholder="Amount" name="answer" value=""
+                                               type="text">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="terms" type="checkbox">I CHECK THE ENTERED NUMBER <a href="#">
+                                            |HOME|</a>
+                                        </label>
+                                    </div>
+                                    <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                            action="{% url 'sign_in:transfers' %}">
+                                        PAY
+                                    </button>
+                                </fieldset>
                             </div>
-                            <fieldset>
-                                <div class="form-group has-error">
-                                    <input class="form-control input-lg" placeholder="Number:" name="email"
-                                           type="text">
-                                </div>
-
-                                <div class="form-group">
-                                    <select class="form-control input-lg">
-                                        <option value="00">Choose</option>
-                                        <option value="00">Student</option>
-                                        <option value="01">Adult</option>
-                                        <option value="02">Retirement</option>
-
-                                    </select>
-
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control input-lg"
-
-                                           placeholder="Amount" name="answer" value=""
-                                           type="text">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="terms" type="checkbox">I CHECK THE ENTERED NUMBER <a href="#">
-                                        |HOME|</a>
-                                    </label>
-                                </div>
-                                <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
-                                        action="{% url 'sign_in:transfers' %}">
-                                    PAY
-                                </button>
-                            </fieldset>
                         </div>
                     </div>
                 </div>
@@ -722,59 +722,58 @@
 </script>
 
 <script>
-{# сама валидация работает#}
-$('#transfer_form').on('submit', function(event){
-event.preventDefault();
-return validate1()
-});
-function validate1() {
-var owner_name = document.getElementById("owner_name");
-var cvv = document.getElementById("cvv");
-var cardNumber = document.getElementById("cardNumber");
-var owner = document.getElementById("owner");
-var amount_of_money = document.getElementById("amount_of_money");
-var card_number_to_trans = document.getElementById("card_number_to_trans");
-console.log("Работает")
+    {# сама валидация работает#}
+    $('#transfer_form').on('submit', function (event) {
+        event.preventDefault();
+        return validate1()
+    });
+
+    function validate1() {
+        var owner_name = document.getElementById("owner_name");
+        var cvv = document.getElementById("cvv");
+        var cardNumber = document.getElementById("cardNumber");
+        var owner = document.getElementById("owner");
+        var amount_of_money = document.getElementById("amount_of_money");
+        var card_number_to_trans = document.getElementById("card_number_to_trans");
+        console.log("Работает");
 //чтобы не переходило по форме
 //e.preventDefault();
-if (!owner_name.value && !cvv.value && !cardNumber.value && !owner.value && !amount_of_money.value && !card_number_to_trans.value)
-{
-owner_name.style.border = "2px solid red";
-cvv.style.border = "2px solid red";
-cardNumber.style.border = "2px solid red";
-owner.style.border = "2px solid red";
-amount_of_money.style.border = "2px solid red";
-card_number_to_trans.style.border = "2px solid red";
-return false;
-}
-if (!owner_name.value) {
-owner_name.style.border = "2px solid red";
-return false;
-}
-if (!cvv.value) {
-cvv.style.border = "2px solid red";
-return false;
-}
-if (!cardNumber.value) {
-cardNumber.style.border = "2px solid red";
-return false;
-}
-if (!owner.value) {
-owner.style.border = "2px solid red";
-return false;
-}
-if (!amount_of_money.value) {
-amount_of_money.style.border = "2px solid red";
-return false;
-}
-if (!card_number_to_trans.value) {
-card_number_to_trans.style.border = "2px solid red";
-return false;
-}
-document.getElementById('transfer_form').submit();
-}
+        if (!owner_name.value && !cvv.value && !cardNumber.value && !owner.value && !amount_of_money.value && !card_number_to_trans.value) {
+            owner_name.style.border = "2px solid red";
+            cvv.style.border = "2px solid red";
+            cardNumber.style.border = "2px solid red";
+            owner.style.border = "2px solid red";
+            amount_of_money.style.border = "2px solid red";
+            card_number_to_trans.style.border = "2px solid red";
+            return false;
+        }
+        if (!owner_name.value) {
+            owner_name.style.border = "2px solid red";
+            return false;
+        }
+        if (!cvv.value) {
+            cvv.style.border = "2px solid red";
+            return false;
+        }
+        if (!cardNumber.value) {
+            cardNumber.style.border = "2px solid red";
+            return false;
+        }
+        if (!owner.value) {
+            owner.style.border = "2px solid red";
+            return false;
+        }
+        if (!amount_of_money.value) {
+            amount_of_money.style.border = "2px solid red";
+            return false;
+        }
+        if (!card_number_to_trans.value) {
+            card_number_to_trans.style.border = "2px solid red";
+            return false;
+        }
+        document.getElementById('transfer_form').submit();
+    }
 </script>
-
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>

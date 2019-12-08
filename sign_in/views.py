@@ -1,13 +1,14 @@
 import logging
-import time
+import urllib
 from random import randint
-
-from django.contrib.auth import login, user_logged_out
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import AnonymousUser, User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from pip._vendor.requests import Session
 
+from sign_in.forms import RegisterForm
 from sign_in.models import LoginValue, Cards
+from django.contrib import messages
 
 
 def index_sign_up(request):
@@ -40,7 +41,7 @@ def recovery_code(request):
     if temp == 1:
         mobizon = 'https://api.mobizon.kz/service/message/sendsmsmessage?recipient=' + phone + '&from&text=Your+recovery+code+is+' + random_code + '&apiKey=kz8e497f591b5d08f4a21f78bb8791f60e62118479e62d3954e7c6c2613efa3ca96d67'
         mobizon_link = mobizon
-        # urllib.request.urlopen(mobizon_link)
+        urllib.request.urlopen(mobizon_link)
         f = open('recovery_data.txt', 'w')
         f.write(random_code + '\n' + phone)
         f.close()
@@ -84,11 +85,16 @@ def new_pass(request):
 
 
 def transfers(request):
-    #if not request.session.has_key("user_id"):
-        #return HttpResponse('proverka')
     all_cards = Cards.objects.all()
+    a = request.session.get('user_id')
+    user = LoginValue.objects.get(sys_id=a)
+    a1 = {'user': user}
+    for i in all_cards:
+        if i.login == user.login:
+            a1.update({'card': i})
     if request.method == 'POST':
         name = request.POST.get('owner_name')
+        name_owner = request.POST.get('owner')
         month = request.POST.get('month')
         year = request.POST.get('year')
         cvv = request.POST.get('cvv')
@@ -99,63 +105,46 @@ def transfers(request):
     f = open('text.txt', 'w')
     while i < len(all_cards):
         if all_cards[i].number == cardNumber:
-            n = i
-            # f.write(str(n))
-            break
+            if all_cards[i].cvv == cvv:
+                if all_cards[i].name == name:
+                    n = i
+                    break
         i = i + 1
     i = 0
     while i < len(all_cards):
         if all_cards[i].number == toTrans:
-            b = i
-            # f.write(str(b))
-            break
+            if all_cards[i].name == name_owner:
+                b = i
+                break
         i = i + 1
-    # f.write(money)
-    # f.close()
     i = 0
     all_cards[b].balance = int(all_cards[b].balance) + money
     all_cards[n].balance = int(all_cards[n].balance) - money
     all_cards[b].save()
     all_cards[n].save()
-    return render(request, 'home/homePage.html')
-
-
-def transfers_confirm(request):
-    all_cards = Cards.objects.all()
-    f = open('text.txt')
-    b = int(f.read(1))
-    n = int(f.read(2))
-    money = int(f.read(3))
-    all_cards[b].balance = all_cards[b].balance + money
-    all_cards[n].balance = all_cards[n].balance - money
-    all_cards[b].save()
-    all_cards[n].save()
-    return HttpResponse("Successful")
+    return render(request, 'home/homePage.html', context=a1)
 
 
 def add_user(request):
     all_users = LoginValue.objects.all()
     if request.method == 'POST':
-        login1 = request.POST.get('login')
-        name = request.POST.get('name')
-        surname = request.POST.get('surname')
-        phone1 = request.POST.get('phone')
-        iin = request.POST.get('iin')
-        pass1 = request.POST.get('pass1')
-        pass2 = request.POST.get('pass2')
-        print("1={} 2={}".format(pass1, pass2))
-        temp = 0
-        for i in all_users:
-            if i.login == login1:
-                temp = 1
-            if i.phone_number == phone1:
-                temp = 2
-            print(i)
-        if pass1 != pass2:
-            return HttpResponse("Password is not similar")
-        else:
-            if temp == 0:
-                if len(phone1) == 11:
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            login1 = form.cleaned_data.get('login')
+            phone1 = form.cleaned_data.get('phone')
+            iin = form.cleaned_data.get('iin')
+            name = form.cleaned_data.get('name')
+            surname = form.cleaned_data.get('surname')
+            pass1 = form.cleaned_data.get('pass1')
+            pass2 = form.cleaned_data.get('pass2')
+            if pass1 == pass2:
+                temp = 0
+                for i in all_users:
+                    if i.login == login1:
+                        temp = 1
+                    if i.phone_number == phone1:
+                        temp = 2
+                if temp == 0:
                     new_user = LoginValue.objects.create(login=login1,
                                                          phone_number=phone1,
                                                          iin=iin,
@@ -163,53 +152,66 @@ def add_user(request):
                                                          surname=surname,
                                                          is_staff=False,
                                                          is_active=False)
-                    # В чем трабла
                     new_user.set_password(pass1)
                     new_user.save()
                     return render(request, 'home/homePage.html')
+                elif temp == 2:
+                    return HttpResponse("This phone has been already used")
                 else:
-                    return HttpResponse("INVALID NUMBER OF PHONE")
-            elif temp == 2:
-                temp = 0
-                return HttpResponse("This phone has been already used")
+                    return HttpResponse("This login has been already used")
             else:
-                temp = 0
-                return HttpResponse("This login has been already used")
+                return HttpResponse("Password is not similar")
+        else:
+            return HttpResponse("Yor data is incorrect")
+
+
+def authenticate(request):
+    all_users = LoginValue.objects.all()
+    if request.method == 'POST':
+        login1 = request.POST.get('login1')
+        pass1 = request.POST.get('pass1')
+        lenth = len(all_users)
+        for i in range(lenth):
+            if all_users[i].login == login1 and all_users[i].check_password(pass1):
+                all_users[i].is_active = True
+                all_users[i].save()
+                return all_users[i]
 
 
 def login_user(request):
     all_users = LoginValue.objects.all()
     all_cards = Cards.objects.all()
-    print(all_users)
-    login1 = ''
-    pass1 = ''
     controller = 0
     a1 = {}
-    #request.session.clear()
     if request.method == 'POST':
-        login1 = request.POST.get('login')
-        pass1 = request.POST.get('pass')
+        login1 = request.POST.get('login1')
+        pass1 = request.POST.get('pass1')
         lenth = len(all_users)
         for i in range(lenth):
             if all_users[i].login == login1 and all_users[i].check_password(pass1):
-                #keys = request.session.keys()
-                #print(keys)
-                #if str(all_users[i].sys_id) in keys:
-                    #print("vrode robit")
-                    #return HttpResponse("This user already auth")
-                #else:
+                # keys = request.session.keys()
+                # print(keys)
+                # if str(all_users[i].sys_id) in keys:
+                # print("vrode robit")
+                # return HttpResponse("This user already auth")
+                # else:
                 a1 = {'user': all_users[i]}
                 all_users[i].is_active = True
                 all_users[i].save()
                 controller = 1
-                request.session[all_users[i].sys_id] = all_users[i].sys_id + 1
+
+                request.session['user_id'] = all_users[i].sys_id
+                request.session.set_expiry(300)
+                print(request.session)
+
                 for i in all_cards:
                     if i.login == login1:
                         a1.update({'card': i})
-                #request.session.set_expiry(300)
-                #time.sleep(10)
-                print(request.session)
     if controller == 1:
+        if request.session.test_cookie_worked():
+            request.session.delete_test_cookie()
+            return render(request, 'home/homePage.html', context=a1)
+        request.session.set_test_cookie()
         return render(request, 'home/homePage.html', context=a1)
     else:
         return HttpResponse('Your login or password is incorrect')
@@ -224,7 +226,7 @@ def logout1(request):
     return HttpResponseRedirect('home/homePage.html')
 
 
-def get_user(self, user_id):
+def get_user(request, user_id):
     try:
         user = LoginValue.objects.get(sys_id=user_id)
         if user.is_active:
@@ -243,8 +245,8 @@ def change_pass(request):
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
     if pass1 == pass2:
-        #for i in all_users:
-                #i.save()
+        # for i in all_users:
+        # i.save()
         return HttpResponseRedirect('home/homePage.html')
     else:
         return HttpResponse("Passwords have no equals")

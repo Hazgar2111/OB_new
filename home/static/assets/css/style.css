@@ -276,7 +276,18 @@ padding: 0 8px 8px;
 }
 
 
-
+.mob{
+border: 10px outset #6c757d; /* Параметры рамки */
+padding: 15px;
+}
+.bet{
+border: 10px outset #6c757d; /* Параметры рамки */
+padding: 15px;
+}
+.onai{
+border: 10px outset #6c757d; /* Параметры рамки */
+padding: 15px;
+}
 
 
 
