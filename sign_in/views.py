@@ -57,12 +57,12 @@ def new_pass(request):
     r_code = ''
     pass1 = ''
     pass2 = ''
-    f = open('C:/Users/User/Desktop/Study/1 simestr 2year/Python_Projects/Online_Banking/recovery_data.txt', 'r')
+    f = open('../recovery_data.txt', 'r')
     ls = [line.strip() for line in f]
     f.close()
     random_code = ls[0]
     phone = ls[1]
-    f = open('C:/Users/User/Desktop/Study/1 simestr 2year/Python_Projects/Online_Banking/recovery_data.txt', 'w')
+    f = open('../recovery_data.txt', 'w')
     f.write(' ')
     f.close()
     if request.method == 'POST':
@@ -93,8 +93,6 @@ def transfers(request):
     if request.method == 'POST':
         name = request.POST.get('owner_name')
         name_owner = request.POST.get('owner')
-        month = request.POST.get('month')
-        year = request.POST.get('year')
         cvv = request.POST.get('cvv')
         cardNumber = request.POST.get('cardNumber')
         toTrans = request.POST.get('card_number_to_trans')
@@ -211,6 +209,35 @@ def logout1(request):
     return HttpResponseRedirect('home/homePage.html')
 
 
+def payments(request):
+    all_cards = Cards.objects.all()
+    a = request.session.get('user_id')
+    user = LoginValue.objects.get(sys_id=a)
+    a1 = {'user': user}
+    for i in all_cards:
+        if i.login == user.login:
+            a1.update({'card': i})
+    if request.method == 'POST':
+        cardNumber = request.POST.get('cardNumber')
+        money = int(request.POST.get('amount_of_money'))
+    i, n, b = 0, 0, 0
+
+    f = open('amount.txt', 'w')
+    while i < len(all_cards):
+        if all_cards[i].number == cardNumber:
+            n = i
+            # f.write(str(n))
+            break
+        i = i + 1
+    i = 0
+
+    all_cards[b].balance = int(all_cards[b].balance) + money
+    all_cards[n].balance = int(all_cards[n].balance) - money
+    all_cards[b].save()
+    all_cards[n].save()
+    return render(request, 'home/homePage.html', context=a1)
+
+
 def get_user(request, user_id):
     try:
         user = LoginValue.objects.get(sys_id=user_id)
@@ -224,12 +251,19 @@ def get_user(request, user_id):
 
 def change_pass(request):
     all_users = LoginValue.objects.all()
+    a = request.session.get('user_id')
+    user = LoginValue.objects.get(sys_id=a)
+    a1 = {'user': user}
     pass1 = ''
     pass2 = ''
     if request.method == 'POST':
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
     if pass1 == pass2:
+        for i in all_users:
+            if i.login == user.login:
+                i.set_password(pass1)
+                i.save()
         # for i in all_users:
         # i.save()
         return HttpResponseRedirect('home/homePage.html')

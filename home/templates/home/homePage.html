@@ -305,31 +305,7 @@
                                 <label for="cardNumber">Card Number</label>
                                 <input type="text" class="form-control" id="cardNumber" name="cardNumber">
                             </div>
-                            <div class="form-group" id="expiration-date">
-                                <label>Expiration Date</label>
-                                <select name="month">
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
-                                </select>
-                                <select name="year">
-                                    <option value="16"> 2019</option>
-                                    <option value="17"> 2020</option>
-                                    <option value="18"> 2021</option>
-                                    <option value="19"> 2022</option>
-                                    <option value="20"> 2023</option>
-                                    <option value="21"> 2024</option>
-                                </select>
-                            </div>
+
                             <div class="form-group" id="credit_cards">
                                 <img src="https://bootstraptema.ru/snippets/form/2017/visa.jpg" id="visa">
                                 <img src="https://bootstraptema.ru/snippets/form/2017/mastercard.jpg" id="mastercard">
@@ -379,146 +355,174 @@
 
 
 
+    <!--payments-->
     <section id="payments" class="payment_trans">
-        <form action="{% url 'sign_in:transfers' %}" method="post">
+        <form action="{% url 'sign_in:payments' %}" method="post">
             {% csrf_token %}
-            <div class="">
-                <div>
-                    <div class="cont1">
-                        <div class="col-lg-3">
-                            <div class="mob">
-                                <div class="">
-                                    <h3 class="text-center">Mobile</h3>
+            <div class="col-lg-4">
+                <div class="mob">
+                    <div>
+                        <h3 class="text-center">Mobile</h3>
 
-                                </div>
-                                <div class="panel-body">
-                                </div>
-                                <fieldset>
-                                    <div class="form-group has-error">
-                                        <input class="form-control input-lg" placeholder="+7(XXX)XXX-XX-XX" name="email"
-                                               type="text">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <select class="form-control input-lg">
-                                            <option value="01">Choose</option>
-                                            <option value="01">Activ</option>
-                                            <option value="02">Kcell</option>
-                                            <option value="03">Altel</option>
-                                            <option value="04">Tele-2</option>
-                                            <option value="05">Beeline</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
-                                               type="text">
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
-                                            |HOME|</a>
-
-                                        </label>
-                                    </div>
-                                    <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
-                                            action="{% url 'sign_in:transfers' %}">
-                                        PAY
-                                    </button>
-                                </fieldset>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="bet">
-                                <div class="">
-                                    <h3 class="text-center">BetGames</h3>
-
-                                </div>
-                                <div class="panel-body">
-                                </div>
-                                <fieldset>
-                                    <div class="form-group has-error">
-                                        <input class="form-control input-lg" placeholder="ID:" name="email" type="text">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <select class="form-control input-lg">
-                                            <option value="01">Choose</option>
-                                            <option value="01">Pari Match</option>
-                                            <option value="02">Olimp</option>
-                                            <option value="03">1XBET</option>
-                                            <option value="04">Tennisi.kz</option>
-                                            <option value="05">Gol+Pass</option>
-                                            <option value="06">Profit</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control input-lg" placeholder="Amount" name="answer" value=""
-                                               type="text">
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
-                                            |HOME|</a>
-
-                                        </label>
-                                    </div>
-                                    <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
-                                            action="{% url 'sign_in:transfers' %}">
-                                        PAY
-                                    </button>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 ">
-                            <div class="onai">
-                                <h3 class="text-center">Onai </h3>
-
-                                <div class="panel-body">
-                                </div>
-                                <fieldset>
-                                    <div class="form-group has-error">
-                                        <input class="form-control input-lg" placeholder="Number:" name="email"
-                                               type="text">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <select class="form-control input-lg">
-                                            <option value="00">Choose</option>
-                                            <option value="00">Student</option>
-                                            <option value="01">Adult</option>
-                                            <option value="02">Retirement</option>
-
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control input-lg"
-
-                                               placeholder="Amount" name="answer" value=""
-                                               type="text">
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input name="terms" type="checkbox">I CHECK THE ENTERED NUMBER <a href="#">
-                                            |HOME|</a>
-                                        </label>
-                                    </div>
-                                    <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
-                                            action="{% url 'sign_in:transfers' %}">
-                                        PAY
-                                    </button>
-                                </fieldset>
-                            </div>
-                        </div>
                     </div>
+                    <div class="panel-body">
+                    </div>
+                    <fieldset>
+                        <div class="form-group has-error">
+                            <input class="form-control input-lg" placeholder="+7(XXX)XXX-XX-XX" name="email"
+                                   type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control input-lg">
+                                <option value="01">Choose</option>
+                                <option value="01">Activ</option>
+                                <option value="02">Kcell</option>
+                                <option value="03">Altel</option>
+                                <option value="04">Tele-2</option>
+                                <option value="05">Beeline</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group" id="card-number-field">
+                            <label>Card Number:</label>
+                            <input type="text" placeholder="Card number" class="form-control input-lg"
+                                   id="card" name="cardNumber" value="{{ card.number }}">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-lg" placeholder="Amount" name="amount_of_money"
+                                   id="amount_of_money"
+                                   type="text">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a href="#">
+                                |HOME|</a>
+
+                            </label>
+                        </div>
+                        <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                action="{% url 'sign_in:payments' %}">
+                            PAY
+                        </button>
+                    </fieldset>
+                </div>
+
+            </div>
+        </form>
+        <form action="{% url 'sign_in:payments' %}" method="post">
+            {% csrf_token %}
+
+            <div class="col-lg-4">
+                <div class="bet">
+                    <div class="">
+                        <h3 class="text-center">BetGames</h3>
+
+                    </div>
+                    <div class="panel-body">
+                    </div>
+                    <fieldset>
+                        <div class="form-group has-error">
+                            <input class="form-control input-lg" placeholder="ID:" name="email"
+                                   type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control input-lg">
+                                <option value="01">Choose</option>
+                                <option value="01">Pari Match</option>
+                                <option value="02">Olimp</option>
+                                <option value="03">1XBET</option>
+                                <option value="04">Tennisi.kz</option>
+                                <option value="05">Gol+Pass</option>
+                                <option value="06">Profit</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group" id="card-number-field">
+                            <label>Card Number:</label>
+                            <input type="text" placeholder="Card number" class="form-control input-lg"
+                                   id="card" name="cardNumber" value="{{ card.number }}">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-lg" placeholder="Amount"
+                                   name="amount_of_money"
+                                   id="amount_of_money"
+                                   type="text">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input name="terms" type="checkbox">I CHECK THE ENTERED PHONE <a
+                                    href="#">
+                                |HOME|</a>
+
+                            </label>
+                        </div>
+                        <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                action="{% url 'sign_in:payments' %}">
+                            PAY
+                        </button>
+                    </fieldset>
                 </div>
             </div>
 
         </form>
+        <form action="{% url 'sign_in:payments' %}" method="post">
+            {% csrf_token %}
+
+            <div class="col-lg-4 ">
+                <div class="onai">
+
+
+                    <h3 class="text-center">Onay </h3>
+
+                    <div class="panel-body">
+                    </div>
+                    <fieldset>
+                        <div class="form-group has-error">
+                            <input class="form-control input-lg" placeholder="Number:" name="email"
+                                   type="text">
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control input-lg">
+                                <option value="00">Choose</option>
+                                <option value="00">Student</option>
+                                <option value="01">Adult</option>
+                                <option value="02">Retirement</option>
+
+                            </select>
+
+                        </div>
+                        <div class="form-group" id="card-number-field">
+                            <label>Card Number:</label>
+                            <input type="text" placeholder="Card number" class="form-control input-lg"
+                                   id="card" name="cardNumber" value="{{ card.number }}">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control input-lg" placeholder="Amount"
+                                   name="amount_of_money"
+                                   id="amount_of_money"
+                                   type="text">
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input name="terms" type="checkbox">I CHECK THE ENTERED NUMBER <a
+                                    href="#">
+                                |HOME|</a>
+                            </label>
+                        </div>
+                        <button class="btn-primary btn-block btn-lg " value="PAY" type="submit"
+                                action="{% url 'sign_in:payments' %}">
+                            PAY
+                        </button>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
     </section>
+    <!--payments-->
 
 
     <section id="recievecard" class="recievecard">
