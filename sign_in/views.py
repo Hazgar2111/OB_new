@@ -4,8 +4,6 @@ from random import randint
 from django.contrib.auth.models import AnonymousUser, User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from pip._vendor.requests import Session
-
 from sign_in.forms import RegisterForm
 from sign_in.models import LoginValue, Cards
 from django.contrib import messages
@@ -165,19 +163,6 @@ def add_user(request):
             return HttpResponse("Yor data is incorrect")
 
 
-def authenticate(request):
-    all_users = LoginValue.objects.all()
-    if request.method == 'POST':
-        login1 = request.POST.get('login1')
-        pass1 = request.POST.get('pass1')
-        lenth = len(all_users)
-        for i in range(lenth):
-            if all_users[i].login == login1 and all_users[i].check_password(pass1):
-                all_users[i].is_active = True
-                all_users[i].save()
-                return all_users[i]
-
-
 def login_user(request):
     all_users = LoginValue.objects.all()
     all_cards = Cards.objects.all()
@@ -190,11 +175,11 @@ def login_user(request):
         for i in range(lenth):
             if all_users[i].login == login1 and all_users[i].check_password(pass1):
                 # keys = request.session.keys()
-                # print(keys)
-                # if str(all_users[i].sys_id) in keys:
-                # print("vrode robit")
-                # return HttpResponse("This user already auth")
-                # else:
+                #                 # print(keys)
+                #                 # if str(all_users[i].sys_id) in keys:
+                #                 # print("vrode robit")
+                #                 # return HttpResponse("This user already auth")
+                #                 # else:
                 a1 = {'user': all_users[i]}
                 all_users[i].is_active = True
                 all_users[i].save()
