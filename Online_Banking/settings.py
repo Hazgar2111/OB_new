@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-DEBUG = False
+DEBUG = True
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,8 +24,7 @@ SECRET_KEY = 't=031-h+ocs8=(9im=3vb5_j&jx8k0b87qhmfe)94_+j$3$zx1'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['b027430e.ngrok.io',
-                 '127.0.0.1:8000']
+ALLOWED_HOSTS = []
 
 # Application definition
 

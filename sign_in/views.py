@@ -57,12 +57,13 @@ def new_pass(request):
     r_code = ''
     pass1 = ''
     pass2 = ''
-    f = open('../recovery_data.txt', 'r')
+    f = open('C:/Users/User/Desktop/Study/1 simestr 2year/Python_Projects/Online_Banking/recovery_data.txt', 'r')
     ls = [line.strip() for line in f]
     f.close()
     random_code = ls[0]
     phone = ls[1]
-    f = open('../recovery_data.txt', 'w')
+    print(ls[0], ls[1])
+    f = open('C:/Users/User/Desktop/Study/1 simestr 2year/Python_Projects/Online_Banking/recovery_data.txt', 'w')
     f.write(' ')
     f.close()
     if request.method == 'POST':
