@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls import url
-from sign_in import views
+from django.urls import include, re_path
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'home/', include('home.urls')),
-    url(r'sign_in/', include('sign_in.urls')),
+    re_path(r'^home/', include('home.urls')),
+    re_path(r'^sign_in/', include('sign_in.urls')),
+    re_path(r'^blockchain/', include('blockchain.urls')),
 ]

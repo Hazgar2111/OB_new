@@ -1,13 +1,12 @@
-from django.conf.urls import url, include
+from django.urls import include, re_path
 from . import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 
 app_name = 'home'
 urlpatterns = [
-    url(r'^', views.index, name='index'),
-    path('personal_cabinet/', views.personal_cabinet, name='personal_cabinet'),
-    url(r'^$', views.index, name='index'),
+    re_path(r'^', views.index, name='index'),
+    #re_path(r'^$', views.index, name='index'),
 
 ]
 

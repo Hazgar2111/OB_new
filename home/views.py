@@ -9,12 +9,7 @@ def index(request):
     return render(request, 'home/homePage.html')
 
 
-def personal_cabinet(request):
-    return render(request, 'home/personal_cabinet.html')
 
-
-def index1(request):
-    return render(request, 'home/test.html')
 
 
 
