@@ -63,11 +63,13 @@ class Blockchain:
             block_index += 1
         return True
 
-    def add_transaction(self, sender, receiver, amount, time):  # New
-        self.transactions.append({'sender': sender,
-                                  'receiver': receiver,
+    def add_transaction(self, sender, receiver, amount, currency, p_or_t):  # New
+        self.transactions.append({'sender_id': sender,
+                                  'receiver_id': receiver,
+                                  'payment_or_transaction': p_or_t, #Если значение равно 0 то платеж, если 1 тогда перевод.
+                                  'currency_id': currency,
                                   'amount': amount,
-                                  'time': str(datetime.datetime.now())})
+                                  'date': str(datetime.datetime.now())})
         previous_block = self.get_last_block()
         return previous_block['index'] + 1
 
@@ -143,11 +145,14 @@ def is_valid(request):
 def add_transaction(request):  # New
     if request.method == 'POST':
         received_json = json.loads(request.body)
-        transaction_keys = ['sender', 'receiver', 'amount', 'time']
+        transaction_keys = ['sender_id', 'receiver_id', 'payment_or_transaction', 'currency_id', 'amount']
         if not all(key in received_json for key in transaction_keys):
             return 'Some elements of the transaction are missing', HttpResponse(status=400)
-        index = blockchain.add_transaction(received_json['sender'], received_json['receiver'], received_json['amount'],
-                                           received_json['time'])
+        index = blockchain.add_transaction(received_json['sender_id'],
+                                           received_json['receiver_id'],
+                                           received_json['payment_or_transaction'],
+                                           received_json['currency_id'],
+                                           received_json['amount'])
         response = {'message': f'This transaction will be added to Block {index}'}
     return JsonResponse(response)
 
